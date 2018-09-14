@@ -1,0 +1,80 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<p-steps [model]="items" styleClass="steps-custom" [(activeIndex)]="activeIndex"></p-steps>
+<form #step1="ngForm" *ngIf="activeIndex == 0">
+<div class="col-sm-10">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
+      <label class="ui-g-6 ui-md-3 ui-lg-2">SURVEY NAME</label>
+      <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+    </div>
+  </div>
+</div>
+<div class="col-sm-10">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
+      <label class="ui-g-6 ui-md-3 ui-lg-2">DESCRIPTION</label>
+      <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" class="ui-g-6 ui-md-3 ui-lg-4"></textarea>
+    </div>
+  </div>
+</div>
+<div class="col-sm-10">
+      <div  style="padding-left: 750px;padding-top: 100px;">
+        <button pButton type="button" label="Next" (click)="check()" 
+        class="ui-button-raised ui-button-success"></button>
+        <button pButton type="reset" label="clear" value="Reset" 
+        class="ui-button-raised ui-button-warning" ></button>
+      </div>
+  </div>
+  </form>
+  <form #step2="ngForm" *ngIf="activeIndex == 1">
+      <div class="p-col ui-g-10"  [@animation]="'visible'">
+          <div class="box" style="height: 200px;">
+            <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
+                <p-dropdown [options]="cities" name="drop" [(ngModel)]="selectedCity" (onClick)="dropdownChange(event)" optionLabel="name" [showClear]="true"></p-dropdown>
+                <option *ngFor="let City of selectedCity" [value]="City.cities"></option>
+            <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
+          </div>
+            <div class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
+                <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 1" [(ngModel)]="val1" 
+                  inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 2" [(ngModel)]="val1" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+            </div>
+        </div>
+      </div>
+        <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()"  style="margin-right: .5em"></button>
+        <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" ></button>        
+        <div class="p-grid" style="margin-top: .5em">
+            <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
+                <div class="box" style="height: 200px;">
+                  <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
+                      <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" name="drop" [showClear]="true"></p-dropdown>
+                      <option *ngFor="let City of selectedCity" [value]="City.cities"></option>
+                  <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
+                </div>
+                  <div class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
+                      <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 1" [(ngModel)]="val1" 
+                        inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                      <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 2" [(ngModel)]="val1" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                      <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                      <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                  </div>
+              </div>
+            </div>
+        </div>
+        <div>
+          hello
+        </div>
+        <div>
+          hi
+        </div>
+    <div class="col-sm-10">
+        <div  style="padding-left: 750px;padding-top: 100px;">
+          <button pButton type="button" label="Next" (click)="check()" 
+          class="ui-button-raised ui-button-success"></button>
+          <button pButton type="reset" label="clear" value="Reset" 
+          class="ui-button-raised ui-button-warning" ></button>
+        </div>
+    </div>
+  </form>
