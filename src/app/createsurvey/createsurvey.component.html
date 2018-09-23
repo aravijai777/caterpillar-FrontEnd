@@ -19,7 +19,7 @@
 </div>
 <div class="col-sm-10">
       <div  style="padding-left: 750px;padding-top: 100px;">
-        <button pButton type="button" label="Next" (click)="check()" 
+        <button pButton type="button" label="Next" (click)="next()" 
         class="ui-button-raised ui-button-success"></button>
         <button pButton type="reset" label="clear" value="Reset" 
         class="ui-button-raised ui-button-warning" ></button>
@@ -27,33 +27,156 @@
   </div>
   </form>
   <form #step2="ngForm" *ngIf="activeIndex == 1">
-      <div class="p-col ui-g-10"  [@animation]="'visible'">
-          <div class="box" style="height: 200px;">
+      <div class="p-grid" style="margin-top: .5em">
+    <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
+      <div class="box" style="height: 500px;">
             <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
-                <p-dropdown [options]="cities" name="drop" [(ngModel)]="selectedCity" (onClick)="dropdownChange(event)" optionLabel="name" [showClear]="true"></p-dropdown>
+                <p-dropdown [options]="cities" name="drop" [(ngModel)]="selectedCity" (onChange)="dropdownChange(selectedCity)" placeholder="Select an Option" optionLabel="name" [showClear]="true"></p-dropdown>
                 <option *ngFor="let City of selectedCity" [value]="City.cities"></option>
             <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
           </div>
-            <div class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
+            <div *ngIf="Radio" class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
                 <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 1" [(ngModel)]="val1" 
-                  inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
-                <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 2" [(ngModel)]="val1" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
-                <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                  inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"><span class="haha-img"></span></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 2" [(ngModel)]="val1" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"> 
+                  <span class="kiss-img"></span></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+                <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"> <span class="tongueout-img"></span></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
                 <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
             </div>
+            
+    <div class="customize-radio" *ngIf="smiley">
+        <label for="hahaha">
+        <input type="radio" name="smiley" id="hahaha">
+        <span class="haha-img"></span>
+        HAHAHA
+        </label>
+        <label for="kiss">
+        <input type="radio" name="smiley" id="kiss">
+        <span class="kiss-img"></span>
+        Kiss
+        </label>
+        <label for="tongueOut">
+        <input type="radio" name="smiley" id="tongueOut">
+        <span class="tongueout-img"></span>
+        TongueOut
+        </label>
+    </div>
+    <div class="sg-question-options " *ngIf="agree">
+			<div class="sg-rating-scale">
+		<table class="sg-rating-scale-7">
+					<thead>
+				
+<tr class="sg-rating-set"><th class="sg-cell sg-cell-1 sg-cell-data sg-first-cell" scope="col">Very Dissatisfied</th><th class="sg-cell sg-cell-2 sg-cell-data" scope="col">Dissatisfied</th><th class="sg-cell sg-cell-3 sg-cell-data" scope="col">Neutral</th><th class="sg-cell sg-cell-4 sg-cell-data" scope="col">Satisfied</th><th class="sg-cell sg-cell-5 sg-cell-data sg-last-cell" scope="col">Very Satisfied</th></tr>			</thead>
+		<tbody>
+			<tr class="sg-rating-set"><td class="sg-cell sg-cell-1 sg-cell-data sg-first-cell"><input type="radio" id="sgE-1819670-1-2-10003" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Very Dissatisfied" value="10003"><label for="sgE-1819670-1-2-10003" class="sg-icon-skip">
+				<span class="sg-screenreader-only">Very Dissatisfied</span>
+				<span class="sg-icon-target" aria-hidden="true"></span>
+			</label></td><td class="sg-cell sg-cell-2 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10004" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Dissatisfied" value="10004"><label for="sgE-1819670-1-2-10004" class="sg-icon-skip">
+				<span class="sg-screenreader-only">Dissatisfied</span>
+				<span class="sg-icon-target" aria-hidden="true"></span>
+			</label></td><td class="sg-cell sg-cell-3 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10005" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Neutral" value="10005"><label for="sgE-1819670-1-2-10005" class="sg-icon-skip">
+				<span class="sg-screenreader-only">Neutral</span>
+				<span class="sg-icon-target" aria-hidden="true"></span>
+			</label></td><td class="sg-cell sg-cell-4 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10006" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Satisfied" value="10006"><label for="sgE-1819670-1-2-10006" class="sg-icon-skip">
+				<span class="sg-screenreader-only">Satisfied</span>
+				<span class="sg-icon-target" aria-hidden="true"></span>
+			</label></td><td class="sg-cell sg-cell-5 sg-cell-data sg-last-cell"><input type="radio" id="sgE-1819670-1-2-10007" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Very Satisfied" value="10007"><label for="sgE-1819670-1-2-10007" class="sg-icon-skip">
+				<span class="sg-screenreader-only">Very Satisfied</span>
+				<span class="sg-icon-target" aria-hidden="true"></span>
+			</label></td></tr>
+		</tbody>
+			</table>
+</div>
+        </div>
+        <a class="mtt" href="https://morningtrain.dk" target="_blank"> </a>
+<div *ngIf="yes" style="margin-top: 100px;">
+  <div class="emoji-toggle emoji-happy">
+    <input type="checkbox" id="toggle1" class="toggle">
+    <div class="emoji"></div>
+    <label for="toggle1" class="well"></label>
+  </div>
+</div>
+
+        <div class="big smiley" *ngIf="smiley">
+        <input  type="radio" name="emotion"  id="sad" class="input-hidden" />
+<label for="sad">
+  <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi9_gPfnNpPdllRu6W2n3lx-Xo-b6N_W5QdDzgZMONeLpod9Jj" 
+    alt="I'm sad" /></label>
+<input   type="radio" name="emotion" id="happy" class="input-hidden" />
+<label for="happy">
+  <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFbWYCOfIcQQTuSFaWdZ-XfD756tnOnreX21jHiiyi6WEefIDQNg" 
+    alt="I'm happy" /></label>
+  </div>
+
+	<div class="rating" *ngIf = "stars">
+    <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
+		<input name="stars" id="e4" type="radio"><label for="e4">☆</label>
+    <input name="stars" id="e3" type="radio"><label for="e3">☆</label>
+		<input name="stars" id="e2" type="radio"><label for="e2">☆</label>
+		<input name="stars" id="e1" type="radio"><label for="e1">☆</label>
+	</div>
+	
+  <div class="rating rating2" *ngIf = "stars">
+    <a href="#5" title="Give 5 stars">★</a>
+    <a href="#4" title="Give 4 stars">★</a>
+	<a href="#3" title="Give 3 stars">★</a>
+	<a href="#2" title="Give 2 stars">★</a>
+		<a href="#1" title="Give 1 star">★</a>
+  </div>
+
+        <form> 
+       <div *ngIf="Slider">
+          <h3 class="first">Basic: {{val}}</h3>
+          <p-slider [(ngModel)]="val" [style]="{'width':'14em'}" [ngModelOptions]="{standalone: true}"></p-slider>
+        </div>
+      </form>
+      <div ng-disabled="smiley">
+    <div class="container" > 
+      <div class="widget" >
+         <button class="detractor">1</button>
+         <button class="detractor">2</button>
+         <button class="detractor">3</button>
+         <button class="detractor">4</button>
+         <button class="detractor">5</button>
+         <button class="passive">6</button>
+         <button class="passive">7</button>
+         <button class="passive">8</button>
+         <button class="promoter">9</button>
+         <button class="promoter">10</button>
+      </div>
+   </div>
+   </div>
+<div *ngIf="smiley">
+  <form id="smileys">
+    <input type="radio" name="smiley" value="sad" class="sad">
+    <input type="radio" name="smiley" value="neutral" class="neutral">
+    <input type="radio" name="smiley" value="happy" class="happy" checked="checked">
+    </form>
+</div>
         </div>
       </div>
-        <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()"  style="margin-right: .5em"></button>
-        <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" ></button>        
-        <div class="p-grid" style="margin-top: .5em">
-            <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
+    </div>
+    <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()"  style="margin-right: .5em"></button>
+    <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" ></button> 
+    <div class="col-sm-10">
+        <div  style="padding-left: 750px;padding-top: 100px;">
+          <button pButton type="button" label="Next" (click)="next()" 
+          class="ui-button-raised ui-button-success"></button>
+          <button pButton type="reset" label="clear" value="Reset" 
+          class="ui-button-raised ui-button-warning" ></button>
+        </div>
+    </div>
+      </form>
+       
+        <!-- <div class="p-grid" style="margin-top: .5em">
+             <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
                 <div class="box" style="height: 200px;">
                   <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
-                      <p-dropdown [options]="cities" [(ngModel)]="selectedCity" placeholder="Select a City" optionLabel="name" name="drop" [showClear]="true"></p-dropdown>
+                      <p-dropdown [options]="cities" [(ngModel)]="selectedCity"  optionLabel="name" name="drop" [showClear]="true"></p-dropdown>
                       <option *ngFor="let City of selectedCity" [value]="City.cities"></option>
                   <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
                 </div>
-                  <div class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
+                  <div *ngIf="div2" class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
                       <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 1" [(ngModel)]="val1" 
                         inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
                       <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 2" [(ngModel)]="val1" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
@@ -62,19 +185,48 @@
                   </div>
               </div>
             </div>
-        </div>
-        <div>
-          hello
-        </div>
-        <div>
-          hi
-        </div>
-    <div class="col-sm-10">
-        <div  style="padding-left: 750px;padding-top: 100px;">
-          <button pButton type="button" label="Next" (click)="check()" 
-          class="ui-button-raised ui-button-success"></button>
-          <button pButton type="reset" label="clear" value="Reset" 
-          class="ui-button-raised ui-button-warning" ></button>
-        </div>
-    </div>
-  </form>
+        </div> -->
+
+
+  
+  <!-- <div >
+    <div class="container" > 
+      <div class="widget">
+         <button class="detractor">1</button>
+         <button class="detractor">2</button>
+         <button class="detractor">3</button>
+         <button class="detractor">4</button>
+         <button class="detractor">5</button>
+         <button class="passive">6</button>
+         <button class="passive">7</button>
+         <button class="passive">8</button>
+         <button class="promoter">9</button>
+         <button class="promoter">10</button>
+      </div>      
+      <br /><br />
+            <div class="widget widget-sm">
+         <div class="button-container">
+            <span class="negative-text">Unlikely</span>
+            <button class="detractor">1</button>
+            <button class="detractor">2</button>
+            <button class="detractor">3</button>
+            <button class="detractor">4</button>
+            <button class="detractor">5</button>
+            <button class="passive">6</button>
+            <button class="passive">7</button>
+            <button class="passive">8</button>
+            <button class="promoter">9</button>
+            <button class="promoter">10</button>
+            <span class="positive-text">Likely</span>
+           </div>
+      </div>      
+   </div>
+  </div> -->
+
+<!-- animated stars-->
+
+
+
+
+  <!-- slider smiley -->
+  

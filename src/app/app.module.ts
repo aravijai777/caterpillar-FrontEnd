@@ -14,6 +14,8 @@ import { trigger, state, style, transition } from '@angular/animations';
 import { FormsModule } from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { DropdownModule } from 'primeng/dropdown';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import {SliderModule} from 'primeng/slider';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { DropdownModule } from 'primeng/dropdown';
   imports: [
     BrowserModule,
     FormsModule ,
+    AngularFontAwesomeModule,
     BrowserAnimationsModule,
     SplitButtonModule,
     ToolbarModule,
@@ -32,6 +35,7 @@ import { DropdownModule } from 'primeng/dropdown';
     ToastModule,
     RadioButtonModule,
     DropdownModule,
+    SliderModule,
     RouterModule.forRoot([
       {path:'create', component: CreatesurveyComponent},
     ])
