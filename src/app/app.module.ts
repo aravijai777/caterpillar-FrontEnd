@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -11,12 +12,11 @@ import {StepsModule} from 'primeng/steps';
 import { MessageService } from '../../node_modules/primeng/api';
 import {ToastModule} from 'primeng/toast';
 import { trigger, state, style, transition } from '@angular/animations';
-import { FormsModule } from '@angular/forms';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {SliderModule} from 'primeng/slider';
-
+import {CheckboxModule} from 'primeng/checkbox';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import {SliderModule} from 'primeng/slider';
     RadioButtonModule,
     DropdownModule,
     SliderModule,
+    CheckboxModule,
     RouterModule.forRoot([
       {path:'create', component: CreatesurveyComponent},
     ])

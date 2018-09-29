@@ -28,14 +28,15 @@
   </form>
   <form #step2="ngForm" *ngIf="activeIndex == 1">
       <div class="p-grid" style="margin-top: .5em">
-    <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
-      <div class="box" style="height: 500px;">
+          <!-- (onChange)="dropdownChange(col.type)" -->
+    <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'" id="{{'Id'+i}}">
+      <div class="box" style="height: 400px;">
             <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
-                <p-dropdown [options]="cities" name="drop" [(ngModel)]="selectedCity" (onChange)="dropdownChange(selectedCity)" placeholder="Select an Option" optionLabel="name" [showClear]="true"></p-dropdown>
-                <option *ngFor="let City of selectedCity" [value]="City.cities"></option>
+                <p-dropdown [options]="cities" [(ngModel)]="col.type" placeholder="Select an Option" optionLabel="name" name="drop" (onChange)="dropdownChange(col)"></p-dropdown>
             <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
           </div>
-            <div *ngIf="Radio" class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
+          <div [ngSwitch]="col.type.name">
+            <div *ngSwitchCase="'Radio'" class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
                 <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 1" [(ngModel)]="val1" 
                   inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"><span class="haha-img"></span></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
                 <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 2" [(ngModel)]="val1" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"> 
@@ -43,30 +44,11 @@
                 <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"> <span class="tongueout-img"></span></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
                 <div class="ui-g-6 ui-lg-6"><p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
             </div>
-            
-    <div class="customize-radio" *ngIf="smiley">
-        <label for="hahaha">
-        <input type="radio" name="smiley" id="hahaha">
-        <span class="haha-img"></span>
-        HAHAHA
-        </label>
-        <label for="kiss">
-        <input type="radio" name="smiley" id="kiss">
-        <span class="kiss-img"></span>
-        Kiss
-        </label>
-        <label for="tongueOut">
-        <input type="radio" name="smiley" id="tongueOut">
-        <span class="tongueout-img"></span>
-        TongueOut
-        </label>
-    </div>
-    <div class="sg-question-options " *ngIf="agree">
+    <div class="sg-question-options" *ngSwitchCase="'Agree/Disagree'">
 			<div class="sg-rating-scale">
 		<table class="sg-rating-scale-7">
-					<thead>
-				
-<tr class="sg-rating-set"><th class="sg-cell sg-cell-1 sg-cell-data sg-first-cell" scope="col">Very Dissatisfied</th><th class="sg-cell sg-cell-2 sg-cell-data" scope="col">Dissatisfied</th><th class="sg-cell sg-cell-3 sg-cell-data" scope="col">Neutral</th><th class="sg-cell sg-cell-4 sg-cell-data" scope="col">Satisfied</th><th class="sg-cell sg-cell-5 sg-cell-data sg-last-cell" scope="col">Very Satisfied</th></tr>			</thead>
+					<thead>				
+     <tr class="sg-rating-set"><th class="sg-cell sg-cell-1 sg-cell-data sg-first-cell" scope="col">Very Dissatisfied</th><th class="sg-cell sg-cell-2 sg-cell-data" scope="col">Dissatisfied</th><th class="sg-cell sg-cell-3 sg-cell-data" scope="col">Neutral</th><th class="sg-cell sg-cell-4 sg-cell-data" scope="col">Satisfied</th><th class="sg-cell sg-cell-5 sg-cell-data sg-last-cell" scope="col">Very Satisfied</th></tr>			</thead>
 		<tbody>
 			<tr class="sg-rating-set"><td class="sg-cell sg-cell-1 sg-cell-data sg-first-cell"><input type="radio" id="sgE-1819670-1-2-10003" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Very Dissatisfied" value="10003"><label for="sgE-1819670-1-2-10003" class="sg-icon-skip">
 				<span class="sg-screenreader-only">Very Dissatisfied</span>
@@ -88,50 +70,53 @@
 			</table>
 </div>
         </div>
-        <a class="mtt" href="https://morningtrain.dk" target="_blank"> </a>
-<div *ngIf="yes" style="margin-top: 100px;">
+        <!-- <a class="mtt" href="https://morningtrain.dk" target="_blank"> </a> -->
+<div *ngSwitchCase="'yes/No'" style="margin-top: 100px;">
+  
   <div class="emoji-toggle emoji-happy">
     <input type="checkbox" id="toggle1" class="toggle">
     <div class="emoji"></div>
     <label for="toggle1" class="well"></label>
   </div>
 </div>
-
-        <div class="big smiley" *ngIf="smiley">
-        <input  type="radio" name="emotion"  id="sad" class="input-hidden" />
-<label for="sad">
-  <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi9_gPfnNpPdllRu6W2n3lx-Xo-b6N_W5QdDzgZMONeLpod9Jj" 
-    alt="I'm sad" /></label>
-<input   type="radio" name="emotion" id="happy" class="input-hidden" />
-<label for="happy">
-  <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFbWYCOfIcQQTuSFaWdZ-XfD756tnOnreX21jHiiyi6WEefIDQNg" 
-    alt="I'm happy" /></label>
-  </div>
-
-	<div class="rating" *ngIf = "stars">
-    <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
-		<input name="stars" id="e4" type="radio"><label for="e4">☆</label>
-    <input name="stars" id="e3" type="radio"><label for="e3">☆</label>
-		<input name="stars" id="e2" type="radio"><label for="e2">☆</label>
-		<input name="stars" id="e1" type="radio"><label for="e1">☆</label>
-	</div>
 	
-  <div class="rating rating2" *ngIf = "stars">
+  <div class="rating rating2"  *ngSwitchCase = "'Star Rating'">
     <a href="#5" title="Give 5 stars">★</a>
     <a href="#4" title="Give 4 stars">★</a>
 	<a href="#3" title="Give 3 stars">★</a>
 	<a href="#2" title="Give 2 stars">★</a>
-		<a href="#1" title="Give 1 star">★</a>
+		<a href="#1" title="Give 1 stars">★</a>
   </div>
-
-        <form> 
-       <div *ngIf="Slider">
+      <!-- <form> -->
+       <div *ngSwitchCase="'Slider'">
           <h3 class="first">Basic: {{val}}</h3>
           <p-slider [(ngModel)]="val" [style]="{'width':'14em'}" [ngModelOptions]="{standalone: true}"></p-slider>
         </div>
-      </form>
-      <div ng-disabled="smiley">
-    <div class="container" > 
+        <!-- </form> -->
+         <!-- slider smiley -->
+ <div id="container" *ngSwitchCase="'Slider'"  style="height: 270px; margin-top: 0px;margin-bottom: 30px;">
+    {{jqueryfun()}} 
+  <form>
+     <div id="first">
+       <label for="slider1">Efficiency</label>
+       <input type="range" id="sliderOne" name="slider1" min=0 max=10 value=0>
+       <div class="score" id="ratingOne">0</div>
+     </div>
+     <div id="second">
+       <label for="slider2" style="padding-right: 20px;">Speed</label>
+       <input type="range" id="sliderTwo" name="slider2" min=0 max=10 value=0>
+       <div class="score" id="ratingTwo">0</div>
+     </div>
+     <div id="third">
+       <label for="slider3">Reliability</label>
+       <input type="range" id="sliderThree" name="slider3" min=0 max=10 value=0>
+       <div class="score" id="ratingThree">0</div>
+     </div>
+     <!-- <input type="submit" value="Submit" action=""> -->
+   </form> 
+ </div>
+    <div class="container" *ngSwitchCase="'NPS Rating (1-10)'"> 
+      {{jqueryfun()}}
       <div class="widget" >
          <button class="detractor">1</button>
          <button class="detractor">2</button>
@@ -145,13 +130,24 @@
          <button class="promoter">10</button>
       </div>
    </div>
-   </div>
-<div *ngIf="smiley">
+<div *ngSwitchCase="'Smileys'">
   <form id="smileys">
     <input type="radio" name="smiley" value="sad" class="sad">
     <input type="radio" name="smiley" value="neutral" class="neutral">
     <input type="radio" name="smiley" value="happy" class="happy" checked="checked">
     </form>
+</div>
+<div *ngSwitchCase="'Multiple Choice'">
+  <div class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
+      <div class="ui-g-8 ui-md-3 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"   [(ngModel)]="selectedCities" inputId="ny"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+      <div class="ui-g-8 ui-md-3 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="sf"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+      <div class="ui-g-6 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  [(ngModel)]="selectedCities" inputId="la"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+      <div class="ui-g-6 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  [(ngModel)]="selectedCities" inputId="la"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+  </div>
+</div>
+<div *ngSwitchCase="'Comment box(Text Area)'">
+  <textarea placeholder="This is an awesome comment box" rows="20" name="comment[text]" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
+</div>
 </div>
         </div>
       </div>
@@ -176,7 +172,7 @@
                       <option *ngFor="let City of selectedCity" [value]="City.cities"></option>
                   <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
                 </div>
-                  <div *ngIf="div2" class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
+                  <div *ngSwitchCase="div2" class="ui-g-12 ui-md-6 ui-lg-10" style="padding-left: 250px;">
                       <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 1" [(ngModel)]="val1" 
                         inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
                       <div class="ui-g-8 ui-md-3 ui-lg-6"><p-radioButton name="group1" value="Option 2" [(ngModel)]="val1" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
@@ -222,11 +218,44 @@
       </div>      
    </div>
   </div> -->
+            
+    <!-- <div class="customize-radio" *ngSwitchCase="Smileys">
+        <label for="hahaha">
+        <input type="radio" name="smiley" id="hahaha">
+        <span class="haha-img"></span>
+        HAHAHA
+        </label>
+        <label for="kiss">
+        <input type="radio" name="smiley" id="kiss">
+        <span class="kiss-img"></span>
+        Kiss
+        </label>
+        <label for="tongueOut">
+        <input type="radio" name="smiley" id="tongueOut">
+        <span class="tongueout-img"></span>
+        TongueOut
+        </label>
+    </div> -->
 
+    
+        <!-- <div class="big smiley" *ngSwitchCase="Smileys">
+        <input  type="radio" name="emotion"  id="sad" class="input-hidden" />
+<label for="sad">
+  <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi9_gPfnNpPdllRu6W2n3lx-Xo-b6N_W5QdDzgZMONeLpod9Jj" 
+    alt="I'm sad" /></label>
+<input   type="radio" name="emotion" id="happy" class="input-hidden" />
+<label for="happy">
+  <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFbWYCOfIcQQTuSFaWdZ-XfD756tnOnreX21jHiiyi6WEefIDQNg" 
+    alt="I'm happy" /></label>
+  </div> -->
+
+	<!-- <div class="rating" *ngIf = "Star Rating">
+    <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
+		<input name="stars" id="e4" type="radio"><label for="e4">☆</label>
+    <input name="stars" id="e3" type="radio"><label for="e3">☆</label>
+		<input name="stars" id="e2" type="radio"><label for="e2">☆</label>
+		<input name="stars" id="e1" type="radio"><label for="e1">☆</label>
+	</div> -->
 <!-- animated stars-->
 
-
-
-
-  <!-- slider smiley -->
-  
+ 

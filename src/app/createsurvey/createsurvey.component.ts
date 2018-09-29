@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import {StepsModule} from 'primeng/steps';
 import { MenuItem } from '../../../node_modules/primeng/components/common/menuitem';
 import {Message} from 'primeng//api';
@@ -16,6 +19,13 @@ declare var $ :any;
 interface City {
     name: string,
     code: string
+}
+interface Questions {
+    order : number,
+    type : string,
+    title : string,
+    options: string[],
+   optional : boolean
 }
 
 @Component({
@@ -43,18 +53,18 @@ interface City {
 ]
 })
 export class CreatesurveyComponent implements OnInit {
+    dropval: any;
     cities: City[];
-
     selectedCity: City;
   activeIndex: number = 0;
   items: MenuItem[];
-  columns: number[];
+  columns: Questions[]=[];
     val1: string;
     val : number;
     Radio: boolean = false;
     div2: boolean = false;
     smiley: boolean = false;
-    NPS: boolean = false;
+    NPS: boolean = true;
     stars: boolean = false;
     agree: boolean =  false;
     multiple: boolean = false;
@@ -62,7 +72,7 @@ export class CreatesurveyComponent implements OnInit {
     yes: boolean = false;
   constructor(private messageService: MessageService)  {
     this.cities = [
-        {name:'Radio' , code: 'Cb'},
+        {name: 'Radio' , code: 'Cb'},
         {name: 'Star Rating', code: 'NY'},
         {name: 'Smileys', code: 'RM'},
         {name: 'NPS Rating (1-10)', code: 'LDN'},
@@ -75,28 +85,36 @@ export class CreatesurveyComponent implements OnInit {
     ];
   }
   ngOnInit() {
-      //animated stars
+      this.addColumn();
+      //slider smiley
+      $(document).ready(function() {
+  
+        $('input[type="range"]').on("change mousemove", function() {
+          $(this).next().html($(this).val());
+        })
+           
+       });
 
       //3 smileys
     $('#smileys input').on('click', function() {
         $('#result').html($(this).val());
     });
 //nps button
-// $('button').hover(function(){
-//     var $this = $(this);
-//     var $prevAll = $(this).prevAll();
+$('button').hover(function(){
+    var $this = $(this);
+    var $prevAll = $(this).prevAll();
     
-//     var className = $this.attr("class") + "-hover";
+    var className = $this.attr("class") + "-hover";
     
-//     $this.addClass(className);
-//     $prevAll.addClass(className);
-//  }, function() {
-//     var $this = $(this);
-//     var $prevAll = $(this).prevAll();
+    $this.addClass(className);
+    $prevAll.addClass(className);
+ }, function() {
+    var $this = $(this);
+    var $prevAll = $(this).prevAll();
     
-//     $this.removeClass("detractor-hover passive-hover promoter-hover");
-//     $prevAll.removeClass("detractor-hover passive-hover promoter-hover");
-//  });
+    $this.removeClass("detractor-hover passive-hover promoter-hover");
+    $prevAll.removeClass("detractor-hover passive-hover promoter-hover");
+ });
 //slider smiley
     this.columns = [];
     this.items = [{
@@ -129,69 +147,45 @@ export class CreatesurveyComponent implements OnInit {
   }
 ];
  }
- dropCheck() {
-    this.Radio = false;
-    this.smiley  = false;
-   this.NPS  = false;
-   this.stars  = false;
-    this.agree  =  false;
-    this.multiple  = false;
-    this.Slider  = false;
-    this.yes = false;
- }
- dropdownChange(drop) {
-    this.dropCheck();
-    if('Radio' == this.selectedCity.name){
-        this.dropCheck();
-        this.Radio = true;
-        }
-    else if('Smileys' == this.selectedCity.name){
-        this.dropCheck();
-        this.smiley = true;
-    }else if('NPS Rating (1-10)' == this.selectedCity.name){
-        this.NPS = true;
-        $('button').hover(function(){
-            var $this = $(this);
-            var $prevAll = $(this).prevAll();
-            
-            var className = $this.attr("class") + "-hover";
-            
-            $this.addClass(className);
-            $prevAll.addClass(className);
-         }, function() {
-            var $this = $(this);
-            var $prevAll = $(this).prevAll();
-            
-            $this.removeClass("detractor-hover passive-hover promoter-hover");
-            $prevAll.removeClass("detractor-hover passive-hover promoter-hover");
-         });     
-    }else if('Star Rating' == this.selectedCity.name){
-        this.dropCheck();
-        this.stars = true;
-    }else if('Agree/Disagree' == this.selectedCity.name){
-        this.dropCheck();
-        this.agree = true;
-    }else if('Multiple Choice' == this.selectedCity.name){
-        this.dropCheck();
-        this.multiple = true;
-    }else if('Slider' == this.selectedCity.name){
-        this.dropCheck();
-        this.Slider = true;
-    }
-    else if('yes/No' == this.selectedCity.name){
-        this.dropCheck();
-        this.yes = true;
-    }
-    console.log(this.selectedCity.name);
+ dropdownChange(dropval) {
+    //console.log(this.dropval.type.name);
+    this.jqueryfun();  
     };
 next(){
     this.activeIndex = 1;
-    // this.columns.push(this.columns.length);
+     this.addColumn();
 }
 addColumn() {
-    this.columns.push(this.columns.length);
+    this.columns.push({order:this.columns.length,type:this.cities[0].name,title:'',options:[],optional:true});
 }
 removeColumn() {
     this.columns.splice(-1, 1);
+}
+jqueryfun(){
+    //NPS
+    $('button').hover(function(){
+        var $this = $(this);
+        var $prevAll = $(this).prevAll();
+        
+        var className = $this.attr("class") + "-hover";
+        
+        $this.addClass(className);
+        $prevAll.addClass(className);
+     }, function() {
+        var $this = $(this);
+        var $prevAll = $(this).prevAll();
+        
+        $this.removeClass("detractor-hover passive-hover promoter-hover");
+        $prevAll.removeClass("detractor-hover passive-hover promoter-hover");
+     });
+
+     //SLIDER SMILEY
+     $(document).ready(function() {
+  
+        $('input[type="range"]').on("change mousemove", function() {
+          $(this).next().html($(this).val());
+        })
+           
+       });
 }
 }
