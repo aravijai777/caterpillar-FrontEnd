@@ -27,6 +27,10 @@ interface Questions {
     options: string[],
    optional : boolean
 }
+interface car{
+    label: string,
+    value : string
+}
 
 @Component({
   selector: 'app-createsurvey',
@@ -70,7 +74,22 @@ export class CreatesurveyComponent implements OnInit {
     multiple: boolean = false;
     Slider: boolean = false;
     yes: boolean = false;
+    cars: car[];
+    selectedCar1 : car;
   constructor(private messageService: MessageService)  {
+    this.cars = [
+        {label: 'Audi', value: 'Audi'},
+        {label: 'BMW', value: 'BMW'},
+        {label: 'Fiat', value: 'Fiat'},
+        {label: 'Ford', value: 'Ford'},
+        {label: 'Honda', value: 'Honda'},
+        {label: 'Jaguar', value: 'Jaguar'},
+        {label: 'Mercedes', value: 'Mercedes'},
+        {label: 'Renault', value: 'Renault'},
+        {label: 'VW', value: 'VW'},
+        {label: 'Volvo', value: 'Volvo'}
+    ];
+
     this.cities = [
         {name: 'Radio' , code: 'Cb'},
         {name: 'Star Rating', code: 'NY'},
@@ -85,6 +104,23 @@ export class CreatesurveyComponent implements OnInit {
     ];
   }
   ngOnInit() {
+      //btn float
+      $(window).scroll(function() {
+        // var winScrollTop = $(window).scrollTop();
+        var winHeight = $(window).height();
+        var floaterHeight = $('#floater').outerHeight(true);
+        var fromBottom = 20;
+        // var top = winScrollTop + winHeight - floaterHeight - fromBottom;
+      $('#floater').css({'top': top + 'px'});
+    });
+    $(window).scroll(function() {
+        // var winScrollTop = $(window).scrollTop();
+        var winHeight = $(window).height();
+        var floaterHeight = $('#float').outerHeight(true);
+        var fromBottom = 20;
+        // var top = winScrollTop + winHeight - floaterHeight - fromBottom;
+      $('#float').css({'top': top + 'px'});
+    });
       this.addColumn();
       //slider smiley
       $(document).ready(function() {
@@ -115,7 +151,6 @@ $('button').hover(function(){
     $this.removeClass("detractor-hover passive-hover promoter-hover");
     $prevAll.removeClass("detractor-hover passive-hover promoter-hover");
  });
-//slider smiley
     this.columns = [];
     this.items = [{
       label: 'CREATE',
@@ -151,9 +186,13 @@ $('button').hover(function(){
     //console.log(this.dropval.type.name);
     this.jqueryfun();  
     };
-next(){
+next(val){
     this.activeIndex = 1;
      this.addColumn();
+     console.log('check');
+}
+surveysave(){
+
 }
 addColumn() {
     this.columns.push({order:this.columns.length,type:this.cities[0].name,title:'',options:[],optional:true});
@@ -164,6 +203,7 @@ removeColumn() {
 jqueryfun(){
     //NPS
     $('button').hover(function(){
+      
         var $this = $(this);
         var $prevAll = $(this).prevAll();
         
@@ -171,6 +211,7 @@ jqueryfun(){
         
         $this.addClass(className);
         $prevAll.addClass(className);
+        console.log('hi');
      }, function() {
         var $this = $(this);
         var $prevAll = $(this).prevAll();
@@ -188,4 +229,13 @@ jqueryfun(){
            
        });
 }
+// closebtn(){
+//     $(document).ready(function(c) {
+//         $('.alert-close').on('click', function(c){
+//             $('.message').fadeOut('slow', function(c){
+//                   $('.message').remove();
+//             });
+//         });	
+//     });
+// }
 }

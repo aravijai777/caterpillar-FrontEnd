@@ -488,23 +488,23 @@ color: #77A60F;
 
 //3 smileys
 // Standard styling, you can ignore this
-body {
-	align-items: center;
-	display: flex;
-	font-family: Helvetica, sans-serif;
-	height: 100vh;
-	justify-content: center;
-	margin: 0;
+// body {
+// 	align-items: center;
+// 	display: flex;
+// 	font-family: Helvetica, sans-serif;
+// 	height: 100vh;
+// 	justify-content: center;
+// 	margin: 0;
 	
-	div {
-		font-size: 15px;
-		margin-top: 15px;
-		text-align: center;
-	}
-}
+// 	div {
+// 		font-size: 15px;
+// 		margin-top: 15px;
+// 		text-align: center;
+// 	}
+// }
 
 // Custom radio buttons
-form {
+div {
 	&#smileys {
 		input[type="radio"] {
 			-webkit-appearance: none;
@@ -681,9 +681,9 @@ form {
           border: 3px solid #eee;
           transform: scale(1);
  
-          transition: background 0.2s ease-in, 
-                      color 0.2s ease-in,
-                      border-color 0.2s ease-in, 
+          transition: background 0.1s ease-in, 
+                      color 0.1s ease-in,
+                      border-color 0.1s ease-in, 
                       transform 0.2s cubic-bezier(0.5,2,0.5,0.75);
  
           &.detractor-hover {
@@ -907,7 +907,7 @@ form {
     color: #eee;
   }
 
-  //text area
+  //text area //span close btn
 //   body {background: #F0F0F0;}
 
 
@@ -942,3 +942,116 @@ form {
     background: none repeat scroll 0 0 #FFFFFF;
     outline-width: 0;
 }
+//span close btn
+// .fragment {
+//     font-size: 12px;
+//     font-family: tahoma;
+//     height: 140px;
+//     border: 1px solid #ccc;
+//     color: #555;
+//     display: block;
+//     padding: 10px;
+//     box-sizing: border-box;
+//     text-decoration: none;
+// }
+
+// .fragment:hover {
+//     box-shadow: 2px 2px 5px rgba(0,0,0,.2);
+
+// }
+
+// .fragment img { 
+//     float: left;
+//     margin-right: 10px;
+// }
+
+
+// .fragment h3 {
+//     padding: 0;
+//     margin: 0;
+//     color: #369;
+// }
+// .fragment h4 {
+//     padding: 0;
+//     margin: 0;
+//     color: #000;
+// }
+// #close {
+//     float:right;
+//     display:inline-block;
+//     padding:2px 5px;
+//     background:#ccc;
+// }
+
+
+// btn close color
+.alert {
+    // background: url(../images/alert_icon.png) 10px 11px #DB7D07;
+    // background: url(../images/alert_icon.png) 10px 11px, -moz-linear-gradient(top, #F8971D, #DB7D07);
+	// background: url(../images/alert_icon.png) 10px 11px, -webkit-linear-gradient(top, #F8971D, #DB7D07);
+	// background: url(../images/alert_icon.png) 10px 11px, -ms-linear-gradient(top, #F8971D, #DB7D07);
+	// background: url(../images/alert_icon.png) 10px 11px, -o-linear-gradient(top, #F8971D, #DB7D07);	
+	// background: url(../images/alert_icon.png) 10px 11px, linear-gradient(top, #F8971D, #DB7D07);		
+	background-repeat: no-repeat;
+}
+
+.alert-close {
+	background: rgba(240, 5, 5, 0.938);
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+	border-radius: 50%;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4),inset 0 -1px 2px rgba(255,255,255,0.25);
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4),inset 0 -1px 2px rgba(255,255,255,0.25);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4),inset 0 -1px 2px rgba(255,255,255,0.25);
+	color: #FFFFFF;
+	cursor: pointer;
+	font-size: 18px;
+	font-weight: normal;
+	height: 22px;
+	line-height: 24px;
+	position: absolute;
+	right: 11px;
+	text-align: center;
+	top: 9px;
+	-webkit-transition: color 0.2s ease-in-out;
+	-moz-transition: color 0.2s ease-in-out;
+	-o-transition: color 0.2s ease-in-out;
+	transition: color 0.2s ease-in-out;
+	width: 22px;
+}
+
+//btn float
+#floater {
+    position: fixed;
+    float: right;
+    /* margin-top: 50px; */
+    /* right:10px; */
+     margin-right: 1px;
+     text-align:right;
+    /* top: 100px; */
+    right: 1px;
+    /* width: 100px; */
+    height: 100px;
+    /* -webkit-transition: all 1s ease-in-out;  */
+    /* transition: all 1s ease-in-out;  */
+    /* z-index: 1; */
+    /* border-radius: 3px 0 0 3px; */
+    /* padding: 10px; */
+    /* background-color: white; */
+    color: white;
+    /* text-align: center; */
+    /* box-sizing: border-box; */
+}
+#float {
+    position: fixed;
+    float: right;
+     margin-right: 1px;
+     text-align:right;
+    right: 1px;
+    height: 100px;
+    color: white;
+}
+
+
