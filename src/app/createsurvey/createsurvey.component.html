@@ -44,7 +44,7 @@
                 <div class="ui-g-2 ui-md-6 ui-lg-12" style="padding-left: 70px;">
                 <label class="ui-g-2 ui-md-3 ui-lg-2" >{{i + 1}}</label>
               <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
-              <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="group1" label="Mandatory"  [(ngModel)]="col.optional" inputId="ny"></p-checkbox>
+              <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="mandatory" label="Mandatory"  [(ngModel)]="col.optional" inputId="mandtry" binary="false"></p-checkbox>
                 <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" [(ngModel)]="col.type" placeholder="CHOOSE TYPE" optionLabel="name" name="drop" (onChange)="dropdownChange(col)" [style]="{'margin-left': '600px'}"></p-dropdown>
           </div>
           <div [ngSwitch]="col.type.name">
@@ -97,7 +97,7 @@
 			</table>
 </div>
         </div>
-        <!-- <a class="mtt" href="https://morningtrain.dk" target="_blank"> </a> -->
+      
 <div *ngSwitchCase="'yes/No'" style="margin-top: 100px;">
   
   <div class="emoji-toggle emoji-happy">
@@ -160,7 +160,7 @@
   <textarea placeholder="This is an awesome comment box" rows="20" name="comment[text]" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
 </div>
 <div *ngSwitchCase="'Text box'"> 
-  <input id="input" type="text" size="30" pInputText [(ngModel)]="text"> 
+  <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="height: 40px;"> 
 </div>
 </div>
         </div>
