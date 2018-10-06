@@ -5,7 +5,7 @@
   <div class="ui-g ui-fluid">
     <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
       <label class="ui-g-6 ui-md-3 ui-lg-2">SURVEY NAME</label>
-      <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="SureyName" name="s_name">
+      <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="SureyName" name="surveyName">
     </div>
   </div>
 </div>
@@ -13,7 +13,7 @@
   <div class="ui-g ui-fluid">
     <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
       <label class="ui-g-6 ui-md-3 ui-lg-2">DESCRIPTION</label>
-      <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="description" name="descrip"></textarea>
+      <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="description" name="description"></textarea>
     </div>
   </div>
 </div>
@@ -27,7 +27,7 @@
   </div>
 <div class="col-sm-10">
       <div  style="padding-left: 750px;padding-top: 100px;">
-        <button pButton type="button" label="Next" (click)="next(SureyName)" 
+        <button pButton type="button" label="Next" (click)="next(step1.value)" 
         class="ui-button-raised ui-button-success"></button>
         <button pButton type="reset" label="clear" value="Reset" 
         class="ui-button-raised ui-button-warning" ></button>
@@ -35,35 +35,29 @@
   </div>
   </form>
   <form #step2="ngForm" *ngIf="activeIndex == 1">
-    <h1 style="text-align: center;">{{SureyName}}</h1>
+    <label style="text-align: center;padding-left: 500px;font-size: 50px;" [(ngModel)]="SureyName" name="col.title"   ngDefaultControl>{{SureyName}}</label>
       <div class="p-grid" style="margin-top: .5em">
     <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'" id="{{'Id'+i}}" >
       <div class="box" style="height: auto;min-height: 150px;">
-          <div class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>×</div>
-          <!-- <span id='close' class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>x</span> -->
+          <!-- <div class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>×</div> -->
+          <span id='close' class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>x</span>
                 <div class="ui-g-2 ui-md-6 ui-lg-12" style="padding-left: 70px;">
-                <label class="ui-g-2 ui-md-3 ui-lg-2" >{{i + 1}}</label>
+                <label class="ui-g-2 ui-md-3 ui-lg-2" name="order"  #name="ngModel"  ngModel ngDefaultControl>{{i + 1}}</label>
               <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
-              <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="mandatory" label="Mandatory"  [(ngModel)]="col.optional" inputId="mandtry" binary="false"></p-checkbox>
-                <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" [(ngModel)]="col.type" placeholder="CHOOSE TYPE" optionLabel="name" name="drop" (onChange)="dropdownChange(col)" [style]="{'margin-left': '600px'}"></p-dropdown>
+              <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="optional" label="Mandatory"  [(ngModel)]="col.optional" inputId="mandtry" binary="false"></p-checkbox>
+                <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" id="{{'dd'+ i}}" [(ngModel)]="col.type" placeholder="CHOOSE TYPE" optionLabel="name" name="drop" (onChange)="dropdownChange(col)" [style]="{'margin-left': '600px'}"></p-dropdown>
           </div>
           <div [ngSwitch]="col.type.name">
               <div class="rad" *ngSwitchCase = "'Radio'" style="padding-left: 250px;height: 200px;">
-              <div class="ui-g-6 ui-md-6 ui-lg-7"  >
-                  <p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                  <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-              </div> <div class="ui-g-6 ui-md-6 ui-lg-7">  <p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+              <div class="ui-g-6 ui-md-6 ui-lg-7">  
+                <p-radioButton name="col.options[0]" value="aaa"  [(ngModel)]="col.options" inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+                <p-radioButton name="options" value="bbb"  [(ngModel)]="col.options" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+              </div> 
+            <div class="ui-g-6 ui-md-6 ui-lg-7">
+                <p-radioButton name="group1" value="ccc"  [(ngModel)]="col.options" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+                <p-radioButton name="group1" value="ddd"  [(ngModel)]="col.options" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
               </div>
             </div>
-            <!-- <div class="rating rating2"  *ngSwitchCase = "'Radio'">
-                <div class="ui-g-6 ui-md-6 ui-lg-7">
-                    <p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                    <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                </div> <div class="ui-g-6 ui-md-6 ui-lg-7">  <p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                  <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                </div>
-                </div> -->
             <div class="rating rating2"  *ngSwitchCase = "'Star Rating'">
               <a href="#5" title="Give 5 stars">★</a>
               <a href="#4" title="Give 4 stars">★</a>
@@ -71,7 +65,7 @@
             <a href="#2" title="Give 2 stars">★</a>
               <a href="#1" title="Give 1 stars">★</a>
               </div>
-    <div class="sg-question-options" *ngSwitchCase="'Agree/Disagree'">
+    <div class="sg-question-options" *ngSwitchCase = "'Agree/Disagree'">
 			<div class="sg-rating-scale">
 		<table class="sg-rating-scale-7">
 					<thead>				
@@ -172,14 +166,22 @@
     <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" ></button> 
     </div>
     </div>
-      <div class="ui-g-12 ui-md-10 ui-md-8 ui-md-6 ui-lg-8" style="margin-left: 60px;" id="floater">
-          <button pButton type="button" label="Next" (click)="surveysave()" 
+      <div class="ui-g-12 ui-md-10 ui-md-8 ui-md-6 ui-lg-8" style="margin-left: 60px;left: auto;top: 300px;" id="floater">
+          <button pButton type="button" label="Next" (click)="surveysave(step2.value)" 
           class="ui-button-raised ui-button-success"></button>
           <button pButton type="reset" label="clear" value="Reset" 
           class="ui-button-raised ui-button-warning" ></button>
         </div>
       </form>
        
+            <!-- <div class="rating rating2"  *ngSwitchCase = "'Radio'">
+                <div class="ui-g-6 ui-md-6 ui-lg-7">
+                    <p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+                    <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+                </div> <div class="ui-g-6 ui-md-6 ui-lg-7">  <p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+                  <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
+                </div>
+                </div> -->
         <!-- <div class="p-grid" style="margin-top: .5em">
              <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
                 <div class="box" style="height: 200px;">

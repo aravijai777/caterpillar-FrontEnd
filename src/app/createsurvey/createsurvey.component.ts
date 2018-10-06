@@ -1,7 +1,9 @@
 import { Component, OnInit, Optional } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
+import {Http, Response, Headers, RequestOptions } from '@angular/http';
+import {  HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {StepsModule} from 'primeng/steps';
 import { MenuItem } from '../../../node_modules/primeng/components/common/menuitem';
 import {Message} from 'primeng//api';
@@ -13,6 +15,10 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {DropdownModule, Dropdown} from 'primeng/dropdown';
 import {SelectItem} from 'primeng/api';
 import {SliderModule} from 'primeng/slider';
+import { Observable } from 'rxjs/Rx';
+ import { map } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
 declare var jquery:any;
 declare var $ :any;
 
@@ -57,6 +63,7 @@ interface car{
 ]
 })
 export class CreatesurveyComponent implements OnInit {
+    feed: object = {};
     dropval: any;
     cities: City[];
     selectedCity: City;
@@ -76,7 +83,8 @@ export class CreatesurveyComponent implements OnInit {
     yes: boolean = false;
     cars: car[];
     selectedCar1 : car;
-  constructor(private messageService: MessageService)  {
+    private headers = new Headers({ 'Content-Type': 'application/json'});
+  constructor(private http:Http,private messageService: MessageService)  {
     this.cars = [
         {label: 'Audi', value: 'Audi'},
         {label: 'BMW', value: 'BMW'},
@@ -104,6 +112,11 @@ export class CreatesurveyComponent implements OnInit {
     ];
   }
   ngOnInit() {
+      //index
+    // get self() {
+    //     return this;
+    //   }
+      
       //btn float
       $(window).scroll(function() {
         // var winScrollTop = $(window).scrollTop();
@@ -187,12 +200,23 @@ $('button').hover(function(){
     this.jqueryfun();  
     };
 next(val){
-    this.activeIndex = 1;
+     console.log(val);
+     this.feed = {
+         "surveyName" : val.surveyName,
+         "description" : val.description,
+         "theme" : val.theme
+     }
+     var headers = new Headers();
+     headers.append('Content-Type', 'application/json');
+     this.http.post("https://directed-will-207311.appspot.com/api/survey",this.feed)
+     .subscribe(() => { console.log(this.feed);
+       alert("Data added sucessfully");
+       this.activeIndex = 1;
      this.addColumn();
-     console.log('check');
+ })
 }
-surveysave(){
-
+surveysave(pass){
+console.log(pass);
 }
 addColumn() {
     this.columns.push({order:this.columns.length,type:this.cities[0].name,title:'',options:[],optional:true});

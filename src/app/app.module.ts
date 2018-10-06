@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { FormsModule , ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -17,6 +19,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {SliderModule} from 'primeng/slider';
 import {CheckboxModule} from 'primeng/checkbox';
+// import { Observable } from 'rxjs/Rx';
+// import { map } from 'rxjs/operators';
+import 'rxjs/add/operator/map';
+import 'rxjs/Rx';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +34,9 @@ import {CheckboxModule} from 'primeng/checkbox';
   imports: [
     BrowserModule,
     FormsModule ,
+    HttpModule,
+    HttpClientModule, 
+    ReactiveFormsModule,
     AngularFontAwesomeModule,
     BrowserAnimationsModule,
     SplitButtonModule,
