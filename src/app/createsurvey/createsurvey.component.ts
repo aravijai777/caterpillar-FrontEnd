@@ -64,6 +64,7 @@ interface car {
     ]
 })
 export class CreatesurveyComponent implements OnInit {
+    masters: any;
     feed: object = {};
     dropval: any;
     cities: City[];
@@ -88,16 +89,7 @@ export class CreatesurveyComponent implements OnInit {
     surveyId: any;
     constructor(private http: Http, private messageService: MessageService,private addSurveyService:AddSurveyService) {
         this.cars = [
-            { label: 'Audi', value: 'Audi' },
-            { label: 'BMW', value: 'BMW' },
-            { label: 'Fiat', value: 'Fiat' },
-            { label: 'Ford', value: 'Ford' },
-            { label: 'Honda', value: 'Honda' },
-            { label: 'Jaguar', value: 'Jaguar' },
-            { label: 'Mercedes', value: 'Mercedes' },
-            { label: 'Renault', value: 'Renault' },
-            { label: 'VW', value: 'VW' },
-            { label: 'Volvo', value: 'Volvo' }
+            { label: 'Default', value: 'dark' }
         ];
 
         this.cities = [
@@ -205,33 +197,43 @@ export class CreatesurveyComponent implements OnInit {
         }
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        // this.http.post("https://directed-will-207311.appspot.com/api/survey", this.feed)
-        //     .subscribe(() => {
-        //         console.log(this.feed);
-        //         // alert("Data added sucessfully");
+        this.http.post("https://directed-will-207311.appspot.com/api/survey", this.feed)
+            .subscribe(() => {
+                console.log(this.feed);
+                this.getSurvey();
                 this.activeIndex = 1;
                 this.addColumn();
-        //     })
+        })
     }
-    surveysave(pass) {
+    surveysave() {
         // console.log(pass);
         let questions= JSON.parse(JSON.stringify(this.columns));
         questions.forEach((el)=>{
             el.type=el.type.name;
         })
         let postParams={
-            survey:'jpi',//this.surveyId
+            survey: this.surveyId,
             question:questions,
             is_completed:false
         }
         console.log(postParams);
         this.addSurveyService.addQuestions(postParams).subscribe(res=>console.log(res));
     }
+    //getting survey ID
+    getSurvey(){
+      this.addSurveyService.getSurveyId().subscribe((res : any[]) => {
+      this.masters = res;
+      this.surveyId = this.masters[0]._id;
+      });
+    }
     addColumn() {
         this.columns.push({ order: this.columns.length, type: this.cities[0], title: '', options: [], optional: true });
     }
     removeColumn() {
         this.columns.splice(-1, 1);
+    }
+    back(){
+        this.activeIndex = 0;
     }
     jqueryfun() {
         //NPS

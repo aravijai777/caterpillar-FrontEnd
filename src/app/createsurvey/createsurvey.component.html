@@ -1,11 +1,17 @@
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
-<p-steps [model]="items" styleClass="steps-custom" [(activeIndex)]="activeIndex"></p-steps>
+<p-steps [model]="items" styleClass="steps-custom" [(activeIndex)]="activeIndex" [style]="{'left': '400px' , 'width': '30%'}"></p-steps>
 <form #step1="ngForm" *ngIf="activeIndex == 0">
+  <div class="borderdiv container">
   <div class="col-sm-10">
     <div class="ui-g ui-fluid">
       <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
-        <label class="ui-g-6 ui-md-3 ui-lg-2">SURVEY NAME</label>
-        <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="SureyName" name="surveyName">
+        <label class="ui-g-6 ui-md-3 ui-lg-2" style="margin-top: 0px;">SURVEY NAME</label>
+        <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4 form-control" [(ngModel)]="SureyName" name="surveyName" #surveyName="ngModel" required minlength="4" pattern="[a-zA-Z ]*"/><span style="color: red">*</span>
+        <div id="error" *ngIf="surveyName.invalid && (surveyName.dirty || surveyName.touched)" class="alert alert-danger">
+  <div *ngIf="surveyName.errors.required">  SurveyName is required.  </div>
+  <div  *ngIf="surveyName.errors.pattern"> SurveyName should be in characters</div>  
+  <div *ngIf="surveyName.errors.minlength"> SureyName must be at least 4 characters long.</div>
+  </div>
       </div>
     </div>
   </div>
@@ -13,8 +19,10 @@
     <div class="ui-g ui-fluid">
       <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
         <label class="ui-g-6 ui-md-3 ui-lg-2">DESCRIPTION</label>
-        <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="description"
-          name="description"></textarea>
+        <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" class="ui-g-6 ui-md-3 ui-lg-4 form-control" [(ngModel)]="description"  required name="description" #Description="ngModel"></textarea><span style="color: red">*</span>
+        <div id="error" *ngIf="Description.invalid && (Description.dirty || Description.touched)" class="alert alert-danger">
+          <div *ngIf="Description.errors.required">  Description is required.  </div>
+          </div>
       </div>
     </div>
   </div>
@@ -22,48 +30,53 @@
     <div class="ui-g ui-fluid">
       <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
         <label class="ui-g-6 ui-md-3 ui-lg-2">THEMES</label>
-        <p-dropdown [options]="cars" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="selectedCar1" [style]="{'width':'150px','padding':'0px'}"
-          placeholder="Select a Theme" name="theme"></p-dropdown>
+        <p-dropdown [options]="cars" class="ui-g-6 ui-md-3 ui-lg-3 form-control" [(ngModel)]="selectedCar1"required #Theme="ngModel" [style]="{'width':'190px','padding':'0px'}" placeholder="Select a Theme" name="theme"></p-dropdown>
+        <span style="color: red">*</span>
+          <div id="error" *ngIf="Theme.invalid && (Theme.dirty || Theme.touched)" class="alert alert-danger">
+            <div *ngIf="Theme.errors.required">  Theme is required.  </div>
+            </div>
       </div>
     </div>
   </div>
+  </div>
   <div class="col-sm-10">
-    <div style="padding-left: 750px;padding-top: 100px;">
-      <button pButton type="button" label="Next" (click)="next(step1.value)" class="ui-button-raised ui-button-success"></button>
+    <div style="padding-left: 750px;padding-top: 100px;"> 
+      <button pButton type="submit" label="Next" [disabled]="!step1.valid"  (click)="next(step1.value)" class="ui-button-raised ui-button-success"></button>
       <button pButton type="reset" label="clear" value="Reset" class="ui-button-raised ui-button-warning"></button>
     </div>
   </div>
 </form>
-<form #step2="ngForm" *ngIf="activeIndex == 1">
+<div  *ngIf="activeIndex == 1">
   <label style="text-align: center;padding-left: 500px;font-size: 50px;" [(ngModel)]="SureyName" name="col.title"
     ngDefaultControl>{{SureyName}}</label>
+    <button pButton type="button" label="Back" class="ui-button-danger" (click)="back()" style="left: 600px;"></button>
   <div class="p-grid" style="margin-top: .5em">
     <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'" id="{{'Id'+i}}">
-      <div class="box" style="height: auto;min-height: 150px;">
+      <div class="box" style="height: auto;min-height: 270px;">
         <!-- <div class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>×</div> -->
-        <span id='close' class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>x</span>
+        <!-- <span id='close' class="alert-close" icon="pi pi-times" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'></span> -->
+          <button pButton id='close' icon="pi pi-times" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;' Class="ui-button-danger" style="padding: 0px;bottom: 15px;border: 0px;margin: 0px;"></button>
         <div class="ui-g-2 ui-md-6 ui-lg-12" style="padding-left: 70px;">
-          <label class="ui-g-2 ui-md-3 ui-lg-2" name="order" #name="ngModel" ngModel ngDefaultControl>{{i + 1}}</label>
+          <label class="ui-g-2 ui-md-3 ui-lg-1" name="order" #name="ngModel" ngModel ngDefaultControl>{{i + 1}}</label>
           <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" [(ngModel)]="col.title" class="ui-g-8 ui-md-3 ui-lg-8"
             [ngModelOptions]="{standalone: true}"></textarea>
           <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="optional" label="Mandatory" [(ngModel)]="col.optional"
             inputId="mandtry" binary="false"></p-checkbox>
-          <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" id="{{'dd'+ i}}" [(ngModel)]="col.type"
-            placeholder="CHOOSE TYPE" optionLabel="name" name="drop" (onChange)="dropdownChange(col)" [style]="{'margin-left': '600px'}"></p-dropdown>
+          <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" id="{{'dd'+ i}}" [(ngModel)]="col.type" placeholder="CHOOSE TYPE" optionLabel="name" name="drop" (onChange)="dropdownChange(col)" [style]="{'width': '190px'}"></p-dropdown>
         </div>
         <div [ngSwitch]="col.type.name">
           <div class="rad" *ngSwitchCase="'Radio'" style="padding-left: 250px;height: 200px;">
             <div class="ui-g-6 ui-md-6 ui-lg-7">
-              <p-radioButton name="col.options[0]" value="aaa" inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
-                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[0]" [ngModelOptions]="{standalone: true}">
-              <p-radioButton name="options" value="bbb" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
-                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[1]" [ngModelOptions]="{standalone: true}">
+              <p-radioButton name="col.options[0]" value="aaa" inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2" disabled="true"></p-radioButton>
+              <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[0]" [ngModelOptions]="{standalone: true}"  >
+              <p-radioButton name="options" value="bbb" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2" disabled="true"></p-radioButton>
+              <input  type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[1]" [ngModelOptions]="{standalone: true}"  >
             </div>
             <div class="ui-g-6 ui-md-6 ui-lg-7">
-              <p-radioButton name="group1" value="ccc" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
-                type="text" [(ngModel)]="col.options[2]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}">
-              <p-radioButton name="group1" value="ddd" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
-                type="text" [(ngModel)]="col.options[3]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}">
+              <p-radioButton name="group1" value="ccc" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2" disabled="true"></p-radioButton>
+              <input type="text" [(ngModel)]="col.options[2]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}"  >
+              <p-radioButton name="group1" value="ddd" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2" disabled="true"></p-radioButton>
+              <input type="text" [(ngModel)]="col.options[3]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}"  >
             </div>
           </div>
           <div class="rating rating2" *ngSwitchCase="'Star Rating'">
@@ -132,21 +145,21 @@
             </div>
           </div>
           <!-- slider smiley -->
-          <div id="container" *ngSwitchCase="'Slider'" style="height: 270px;margin-top: 90px;margin-bottom: 30px;padding-bottom: 0px;padding-top: 0px;">
+          <div id="container" *ngSwitchCase="'Slider'" style="height: 300px;margin-top: 90px;margin-bottom: 30px;padding-bottom: 0px;padding-top: 0px;">
             {{jqueryfun()}}
             <!-- <form> -->
             <div id="first">
-              <label for="slider1">Efficiency</label>
+              <input type="text" [(ngModel)]="col.options[1]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}"  >
               <input type="range" id="sliderOne" name="slider1" min=0 max=10 value=0>
               <div class="score" id="ratingOne">0</div>
             </div>
             <div id="second">
-              <label for="slider2" style="padding-right: 20px;">Speed</label>
+              <input type="text" [(ngModel)]="col.options[2]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}"  >
               <input type="range" id="sliderTwo" name="slider2" min=0 max=10 value=0>
               <div class="score" id="ratingTwo">0</div>
             </div>
             <div id="third">
-              <label for="slider3">Reliability</label>
+              <input type="text" [(ngModel)]="col.options[3]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}"  >
               <input type="range" id="sliderThree" name="slider3" min=0 max=10 value=0>
               <div class="score" id="ratingThree">0</div>
             </div>
@@ -177,29 +190,29 @@
           </div>
           <div class="MChoice" style="padding-left: 250px;height: 200px;" *ngSwitchCase="'Multiple Choice'">
             <div class="ui-g-8 ui-md-3 ui-lg-6">
-              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="ny" binary="true"></p-checkbox><input
-                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[0]" [ngModelOptions]="{standalone: true}">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  inputId="ny" binary="true" disabled="true"></p-checkbox>
+              <input  type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[0]" [ngModelOptions]="{standalone: true}" >
             </div>
             <div class="ui-g-8 ui-md-3 ui-lg-6">
-              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="sf" binary="true"></p-checkbox><input
-                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[1]" [ngModelOptions]="{standalone: true}">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  inputId="sf" binary="true" disabled="true"></p-checkbox>
+              <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[1]" [ngModelOptions]="{standalone: true}" >
             </div>
             <div class="ui-g-6 ui-lg-6">
-              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="la" binary="true"></p-checkbox><input
-                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[2]" [ngModelOptions]="{standalone: true}">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  inputId="la" binary="true" disabled="true"></p-checkbox>
+              <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[2]" [ngModelOptions]="{standalone: true}" >
             </div>
             <div class="ui-g-6 ui-lg-6">
-              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="la" binary="true"></p-checkbox><input
-                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[3]" [ngModelOptions]="{standalone: true}">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  inputId="la" binary="true" disabled="true"></p-checkbox>
+              <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[3]" [ngModelOptions]="{standalone: true}" >
             </div>
           </div>
           <div *ngSwitchCase="'Comment box(Text Area)'">
             <textarea placeholder="This is an awesome comment box" rows="20" name="comment[text]" id="comment_text"
               cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list"
-              aria-haspopup="true"></textarea>
+              aria-haspopup="true" disabled></textarea>
           </div>
           <div *ngSwitchCase="'Text box'">
-            <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="height: 40px;">
+            <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="height: 40px;" disabled>
           </div>
         </div>
       </div>
@@ -211,11 +224,11 @@
       <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()"></button>
     </div>
   </div>
-  <div class="" style="margin-left: 60px;left: auto;top: 300px;" id="floater">
-    <button pButton type="button" label="Next" (click)="surveysave(step2.value)" class="ui-button-raised ui-button-success"></button>
+  <div class="" style="right:100px;top: 350px;" id="floater">
+    <button pButton type="button" label="Next" (click)="surveysave()" class="ui-button-raised ui-button-success"></button>
     <button pButton type="reset" label="clear" value="Reset" class="ui-button-raised ui-button-warning"></button>
   </div>
-</form>
+</div>
 
 <!-- <div class="rating rating2"  *ngSwitchCase = "'Radio'">
                 <div class="ui-g-6 ui-md-6 ui-lg-7">
