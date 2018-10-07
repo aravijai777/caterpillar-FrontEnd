@@ -1,180 +1,223 @@
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
 <p-steps [model]="items" styleClass="steps-custom" [(activeIndex)]="activeIndex"></p-steps>
 <form #step1="ngForm" *ngIf="activeIndex == 0">
-<div class="col-sm-10">
-  <div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
-      <label class="ui-g-6 ui-md-3 ui-lg-2">SURVEY NAME</label>
-      <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="SureyName" name="surveyName">
+  <div class="col-sm-10">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
+        <label class="ui-g-6 ui-md-3 ui-lg-2">SURVEY NAME</label>
+        <input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="SureyName" name="surveyName">
+      </div>
     </div>
   </div>
-</div>
-<div class="col-sm-10">
-  <div class="ui-g ui-fluid">
-    <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
-      <label class="ui-g-6 ui-md-3 ui-lg-2">DESCRIPTION</label>
-      <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="description" name="description"></textarea>
+  <div class="col-sm-10">
+    <div class="ui-g ui-fluid">
+      <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
+        <label class="ui-g-6 ui-md-3 ui-lg-2">DESCRIPTION</label>
+        <textarea rows="5" cols="30" pInputTextarea autoResize="autoResize" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="description"
+          name="description"></textarea>
+      </div>
     </div>
   </div>
-</div>
-<div class="col-sm-10">
+  <div class="col-sm-10">
     <div class="ui-g ui-fluid">
       <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
         <label class="ui-g-6 ui-md-3 ui-lg-2">THEMES</label>
-        <p-dropdown [options]="cars" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="selectedCar1" [style]="{'width':'150px','padding':'0px'}" placeholder="Select a Theme" name="theme"></p-dropdown>
+        <p-dropdown [options]="cars" class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="selectedCar1" [style]="{'width':'150px','padding':'0px'}"
+          placeholder="Select a Theme" name="theme"></p-dropdown>
       </div>
     </div>
   </div>
-<div class="col-sm-10">
-      <div  style="padding-left: 750px;padding-top: 100px;">
-        <button pButton type="button" label="Next" (click)="next(step1.value)" 
-        class="ui-button-raised ui-button-success"></button>
-        <button pButton type="reset" label="clear" value="Reset" 
-        class="ui-button-raised ui-button-warning" ></button>
-      </div>
+  <div class="col-sm-10">
+    <div style="padding-left: 750px;padding-top: 100px;">
+      <button pButton type="button" label="Next" (click)="next(step1.value)" class="ui-button-raised ui-button-success"></button>
+      <button pButton type="reset" label="clear" value="Reset" class="ui-button-raised ui-button-warning"></button>
+    </div>
   </div>
-  </form>
-  <form #step2="ngForm" *ngIf="activeIndex == 1">
-    <label style="text-align: center;padding-left: 500px;font-size: 50px;" [(ngModel)]="SureyName" name="col.title"   ngDefaultControl>{{SureyName}}</label>
-      <div class="p-grid" style="margin-top: .5em">
-    <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'" id="{{'Id'+i}}" >
+</form>
+<form #step2="ngForm" *ngIf="activeIndex == 1">
+  <label style="text-align: center;padding-left: 500px;font-size: 50px;" [(ngModel)]="SureyName" name="col.title"
+    ngDefaultControl>{{SureyName}}</label>
+  <div class="p-grid" style="margin-top: .5em">
+    <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'" id="{{'Id'+i}}">
       <div class="box" style="height: auto;min-height: 150px;">
-          <!-- <div class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>×</div> -->
-          <span id='close' class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>x</span>
-                <div class="ui-g-2 ui-md-6 ui-lg-12" style="padding-left: 70px;">
-                <label class="ui-g-2 ui-md-3 ui-lg-2" name="order"  #name="ngModel"  ngModel ngDefaultControl>{{i + 1}}</label>
-              <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" class="ui-g-8 ui-md-3 ui-lg-8"></textarea>
-              <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="optional" label="Mandatory"  [(ngModel)]="col.optional" inputId="mandtry" binary="false"></p-checkbox>
-                <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" id="{{'dd'+ i}}" [(ngModel)]="col.type" placeholder="CHOOSE TYPE" optionLabel="name" name="drop" (onChange)="dropdownChange(col)" [style]="{'margin-left': '600px'}"></p-dropdown>
-          </div>
-          <div [ngSwitch]="col.type.name">
-              <div class="rad" *ngSwitchCase = "'Radio'" style="padding-left: 250px;height: 200px;">
-              <div class="ui-g-6 ui-md-6 ui-lg-7">  
-                <p-radioButton name="col.options[0]" value="aaa"  [(ngModel)]="col.options" inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                <p-radioButton name="options" value="bbb"  [(ngModel)]="col.options" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-              </div> 
+        <!-- <div class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>×</div> -->
+        <span id='close' class="alert-close" onclick='this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode); return false;'>x</span>
+        <div class="ui-g-2 ui-md-6 ui-lg-12" style="padding-left: 70px;">
+          <label class="ui-g-2 ui-md-3 ui-lg-2" name="order" #name="ngModel" ngModel ngDefaultControl>{{i + 1}}</label>
+          <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" [(ngModel)]="col.title" class="ui-g-8 ui-md-3 ui-lg-8"
+            [ngModelOptions]="{standalone: true}"></textarea>
+          <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="optional" label="Mandatory" [(ngModel)]="col.optional"
+            inputId="mandtry" binary="false"></p-checkbox>
+          <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" id="{{'dd'+ i}}" [(ngModel)]="col.type"
+            placeholder="CHOOSE TYPE" optionLabel="name" name="drop" (onChange)="dropdownChange(col)" [style]="{'margin-left': '600px'}"></p-dropdown>
+        </div>
+        <div [ngSwitch]="col.type.name">
+          <div class="rad" *ngSwitchCase="'Radio'" style="padding-left: 250px;height: 200px;">
             <div class="ui-g-6 ui-md-6 ui-lg-7">
-                <p-radioButton name="group1" value="ccc"  [(ngModel)]="col.options" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-                <p-radioButton name="group1" value="ddd"  [(ngModel)]="col.options" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
-              </div>
+              <p-radioButton name="col.options[0]" value="aaa" inputId="opt1" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
+                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[0]" [ngModelOptions]="{standalone: true}">
+              <p-radioButton name="options" value="bbb" inputId="opt2" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
+                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[1]" [ngModelOptions]="{standalone: true}">
             </div>
-            <div class="rating rating2"  *ngSwitchCase = "'Star Rating'">
-              <a href="#5" title="Give 5 stars">★</a>
-              <a href="#4" title="Give 4 stars">★</a>
+            <div class="ui-g-6 ui-md-6 ui-lg-7">
+              <p-radioButton name="group1" value="ccc" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
+                type="text" [(ngModel)]="col.options[2]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}">
+              <p-radioButton name="group1" value="ddd" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input
+                type="text" [(ngModel)]="col.options[3]" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div class="rating rating2" *ngSwitchCase="'Star Rating'">
+            <a href="#5" title="Give 5 stars">★</a>
+            <a href="#4" title="Give 4 stars">★</a>
             <a href="#3" title="Give 3 stars">★</a>
             <a href="#2" title="Give 2 stars">★</a>
-              <a href="#1" title="Give 1 stars">★</a>
-              </div>
-    <div class="sg-question-options" *ngSwitchCase = "'Agree/Disagree'">
-			<div class="sg-rating-scale">
-		<table class="sg-rating-scale-7">
-					<thead>				
-     <tr class="sg-rating-set"><th class="sg-cell sg-cell-1 sg-cell-data sg-first-cell" scope="col">Very Dissatisfied</th><th class="sg-cell sg-cell-2 sg-cell-data" scope="col">Dissatisfied</th><th class="sg-cell sg-cell-3 sg-cell-data" scope="col">Neutral</th><th class="sg-cell sg-cell-4 sg-cell-data" scope="col">Satisfied</th><th class="sg-cell sg-cell-5 sg-cell-data sg-last-cell" scope="col">Very Satisfied</th></tr>			</thead>
-		<tbody>
-			<tr class="sg-rating-set"><td class="sg-cell sg-cell-1 sg-cell-data sg-first-cell"><input type="radio" id="sgE-1819670-1-2-10003" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Very Dissatisfied" value="10003"><label for="sgE-1819670-1-2-10003" class="sg-icon-skip">
-				<span class="sg-screenreader-only">Very Dissatisfied</span>
-				<span class="sg-icon-target" aria-hidden="true"></span>
-			</label></td><td class="sg-cell sg-cell-2 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10004" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Dissatisfied" value="10004"><label for="sgE-1819670-1-2-10004" class="sg-icon-skip">
-				<span class="sg-screenreader-only">Dissatisfied</span>
-				<span class="sg-icon-target" aria-hidden="true"></span>
-			</label></td><td class="sg-cell sg-cell-3 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10005" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Neutral" value="10005"><label for="sgE-1819670-1-2-10005" class="sg-icon-skip">
-				<span class="sg-screenreader-only">Neutral</span>
-				<span class="sg-icon-target" aria-hidden="true"></span>
-			</label></td><td class="sg-cell sg-cell-4 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10006" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Satisfied" value="10006"><label for="sgE-1819670-1-2-10006" class="sg-icon-skip">
-				<span class="sg-screenreader-only">Satisfied</span>
-				<span class="sg-icon-target" aria-hidden="true"></span>
-			</label></td><td class="sg-cell sg-cell-5 sg-cell-data sg-last-cell"><input type="radio" id="sgE-1819670-1-2-10007" class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Very Satisfied" value="10007"><label for="sgE-1819670-1-2-10007" class="sg-icon-skip">
-				<span class="sg-screenreader-only">Very Satisfied</span>
-				<span class="sg-icon-target" aria-hidden="true"></span>
-			</label></td></tr>
-		</tbody>
-			</table>
-</div>
+            <a href="#1" title="Give 1 stars">★</a>
+          </div>
+          <div class="sg-question-options" *ngSwitchCase="'Agree/Disagree'">
+            <div class="sg-rating-scale">
+              <table class="sg-rating-scale-7">
+                <thead>
+                  <tr class="sg-rating-set">
+                    <th class="sg-cell sg-cell-1 sg-cell-data sg-first-cell" scope="col">Very Dissatisfied</th>
+                    <th class="sg-cell sg-cell-2 sg-cell-data" scope="col">Dissatisfied</th>
+                    <th class="sg-cell sg-cell-3 sg-cell-data" scope="col">Neutral</th>
+                    <th class="sg-cell sg-cell-4 sg-cell-data" scope="col">Satisfied</th>
+                    <th class="sg-cell sg-cell-5 sg-cell-data sg-last-cell" scope="col">Very Satisfied</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="sg-rating-set">
+                    <td class="sg-cell sg-cell-1 sg-cell-data sg-first-cell"><input type="radio" id="sgE-1819670-1-2-10003"
+                        class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Very Dissatisfied" value="10003"><label
+                        for="sgE-1819670-1-2-10003" class="sg-icon-skip">
+                        <span class="sg-screenreader-only">Very Dissatisfied</span>
+                        <span class="sg-icon-target" aria-hidden="true"></span>
+                      </label></td>
+                    <td class="sg-cell sg-cell-2 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10004" class="sg-input sg-input-radio"
+                        name="sgE-1819670-1-2" aria-label="Dissatisfied" value="10004"><label for="sgE-1819670-1-2-10004"
+                        class="sg-icon-skip">
+                        <span class="sg-screenreader-only">Dissatisfied</span>
+                        <span class="sg-icon-target" aria-hidden="true"></span>
+                      </label></td>
+                    <td class="sg-cell sg-cell-3 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10005" class="sg-input sg-input-radio"
+                        name="sgE-1819670-1-2" aria-label="Neutral" value="10005"><label for="sgE-1819670-1-2-10005"
+                        class="sg-icon-skip">
+                        <span class="sg-screenreader-only">Neutral</span>
+                        <span class="sg-icon-target" aria-hidden="true"></span>
+                      </label></td>
+                    <td class="sg-cell sg-cell-4 sg-cell-data"><input type="radio" id="sgE-1819670-1-2-10006" class="sg-input sg-input-radio"
+                        name="sgE-1819670-1-2" aria-label="Satisfied" value="10006"><label for="sgE-1819670-1-2-10006"
+                        class="sg-icon-skip">
+                        <span class="sg-screenreader-only">Satisfied</span>
+                        <span class="sg-icon-target" aria-hidden="true"></span>
+                      </label></td>
+                    <td class="sg-cell sg-cell-5 sg-cell-data sg-last-cell"><input type="radio" id="sgE-1819670-1-2-10007"
+                        class="sg-input sg-input-radio" name="sgE-1819670-1-2" aria-label="Very Satisfied" value="10007"><label
+                        for="sgE-1819670-1-2-10007" class="sg-icon-skip">
+                        <span class="sg-screenreader-only">Very Satisfied</span>
+                        <span class="sg-icon-target" aria-hidden="true"></span>
+                      </label></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div *ngSwitchCase="'yes/No'" style="margin-top: 100px;">
+
+            <div class="emoji-toggle emoji-happy">
+              <input type="checkbox" id="toggle1" class="toggle">
+              <div class="emoji"></div>
+              <label for="toggle1" class="well"></label>
+            </div>
+          </div>
+          <!-- slider smiley -->
+          <div id="container" *ngSwitchCase="'Slider'" style="height: 270px;margin-top: 90px;margin-bottom: 30px;padding-bottom: 0px;padding-top: 0px;">
+            {{jqueryfun()}}
+            <!-- <form> -->
+            <div id="first">
+              <label for="slider1">Efficiency</label>
+              <input type="range" id="sliderOne" name="slider1" min=0 max=10 value=0>
+              <div class="score" id="ratingOne">0</div>
+            </div>
+            <div id="second">
+              <label for="slider2" style="padding-right: 20px;">Speed</label>
+              <input type="range" id="sliderTwo" name="slider2" min=0 max=10 value=0>
+              <div class="score" id="ratingTwo">0</div>
+            </div>
+            <div id="third">
+              <label for="slider3">Reliability</label>
+              <input type="range" id="sliderThree" name="slider3" min=0 max=10 value=0>
+              <div class="score" id="ratingThree">0</div>
+            </div>
+            <!-- <input type="submit" value="Submit" action=""> -->
+            <!-- </form>  -->
+          </div>
+          <div class="container" *ngSwitchCase="'NPS Rating (1-10)'">
+            {{jqueryfun()}}
+            <div class="widget">
+              <button class="detractor">1</button>
+              <button class="detractor">2</button>
+              <button class="detractor">3</button>
+              <button class="detractor">4</button>
+              <button class="detractor">5</button>
+              <button class="passive">6</button>
+              <button class="passive">7</button>
+              <button class="passive">8</button>
+              <button class="promoter">9</button>
+              <button class="promoter">10</button>
+            </div>
+          </div>
+          <div *ngSwitchCase="'Smileys'">
+            <div id="smileys">
+              <input type="radio" name="smiley" value="sad" class="sad">
+              <input type="radio" name="smiley" value="neutral" class="neutral">
+              <input type="radio" name="smiley" value="happy" class="happy" checked="checked">
+            </div>
+          </div>
+          <div class="MChoice" style="padding-left: 250px;height: 200px;" *ngSwitchCase="'Multiple Choice'">
+            <div class="ui-g-8 ui-md-3 ui-lg-6">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="ny" binary="true"></p-checkbox><input
+                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[0]" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="ui-g-8 ui-md-3 ui-lg-6">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="sf" binary="true"></p-checkbox><input
+                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[1]" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="ui-g-6 ui-lg-6">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="la" binary="true"></p-checkbox><input
+                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[2]" [ngModelOptions]="{standalone: true}">
+            </div>
+            <div class="ui-g-6 ui-lg-6">
+              <p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="la" binary="true"></p-checkbox><input
+                type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4" [(ngModel)]="col.options[3]" [ngModelOptions]="{standalone: true}">
+            </div>
+          </div>
+          <div *ngSwitchCase="'Comment box(Text Area)'">
+            <textarea placeholder="This is an awesome comment box" rows="20" name="comment[text]" id="comment_text"
+              cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list"
+              aria-haspopup="true"></textarea>
+          </div>
+          <div *ngSwitchCase="'Text box'">
+            <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="height: 40px;">
+          </div>
         </div>
-      
-<div *ngSwitchCase="'yes/No'" style="margin-top: 100px;">
-  
-  <div class="emoji-toggle emoji-happy">
-    <input type="checkbox" id="toggle1" class="toggle">
-    <div class="emoji"></div>
-    <label for="toggle1" class="well"></label>
-  </div>
-</div>
-	         <!-- slider smiley -->
- <div id="container" *ngSwitchCase="'Slider'"  style="height: 270px;margin-top: 90px;margin-bottom: 30px;padding-bottom: 0px;padding-top: 0px;">
-    {{jqueryfun()}} 
-  <!-- <form> -->
-     <div id="first">
-       <label for="slider1">Efficiency</label>
-       <input type="range" id="sliderOne" name="slider1" min=0 max=10 value=0>
-       <div class="score" id="ratingOne">0</div>
-     </div>
-     <div id="second">
-       <label for="slider2" style="padding-right: 20px;">Speed</label>
-       <input type="range" id="sliderTwo" name="slider2" min=0 max=10 value=0>
-       <div class="score" id="ratingTwo">0</div>
-     </div>
-     <div id="third">
-       <label for="slider3">Reliability</label>
-       <input type="range" id="sliderThree" name="slider3" min=0 max=10 value=0>
-       <div class="score" id="ratingThree">0</div>
-     </div>
-     <!-- <input type="submit" value="Submit" action=""> -->
-   <!-- </form>  -->
- </div>
-    <div class="container" *ngSwitchCase="'NPS Rating (1-10)'"> 
-      {{jqueryfun()}}
-      <div class="widget" >
-         <button class="detractor">1</button>
-         <button class="detractor">2</button>
-         <button class="detractor">3</button>
-         <button class="detractor">4</button>
-         <button class="detractor">5</button>
-         <button class="passive">6</button>
-         <button class="passive">7</button>
-         <button class="passive">8</button>
-         <button class="promoter">9</button>
-         <button class="promoter">10</button>
       </div>
-   </div>
-<div *ngSwitchCase="'Smileys'">
-  <div id="smileys">
-    <input type="radio" name="smiley" value="sad" class="sad">
-    <input type="radio" name="smiley" value="neutral" class="neutral">
-    <input type="radio" name="smiley" value="happy" class="happy" checked="checked">
+    </div>
   </div>
-</div>
-  <div class="MChoice" style="padding-left: 250px;height: 200px;"  *ngSwitchCase="'Multiple Choice'">
-      <div class="ui-g-8 ui-md-3 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"   [(ngModel)]="selectedCities" inputId="ny" binary="true"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
-      <div class="ui-g-8 ui-md-3 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1" [(ngModel)]="selectedCities" inputId="sf" binary="true"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
-      <div class="ui-g-6 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  [(ngModel)]="selectedCities" inputId="la" binary="true"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
-      <div class="ui-g-6 ui-lg-6"><p-checkbox class="ui-g-6 ui-md-3 ui-lg-2" name="group1"  [(ngModel)]="selectedCities" inputId="la" binary="true"></p-checkbox><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4"></div>
+  <div class="ui-g-2 ui-md-6 ui-lg-4">
+    <div class="ui-g-12 ui-md-10 ui-md-8 ui-md-6 ui-lg-8">
+      <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()" style="margin-right: .5em"></button>
+      <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()"></button>
+    </div>
   </div>
-<div *ngSwitchCase="'Comment box(Text Area)'">
-  <textarea placeholder="This is an awesome comment box" rows="20" name="comment[text]" id="comment_text" cols="40" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true"></textarea>
-</div>
-<div *ngSwitchCase="'Text box'"> 
-  <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="height: 40px;"> 
-</div>
-</div>
-        </div>
-      </div>
-    </div>
-    <div class="ui-g-2 ui-md-6 ui-lg-4">
-      <div class="ui-g-12 ui-md-10 ui-md-8 ui-md-6 ui-lg-8" >
-    <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()"  style="margin-right: .5em"></button>
-    <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()" ></button> 
-    </div>
-    </div>
-      <div class="ui-g-12 ui-md-10 ui-md-8 ui-md-6 ui-lg-8" style="margin-left: 60px;left: auto;top: 300px;" id="floater">
-          <button pButton type="button" label="Next" (click)="surveysave(step2.value)" 
-          class="ui-button-raised ui-button-success"></button>
-          <button pButton type="reset" label="clear" value="Reset" 
-          class="ui-button-raised ui-button-warning" ></button>
-        </div>
-      </form>
-       
-            <!-- <div class="rating rating2"  *ngSwitchCase = "'Radio'">
+  <div class="" style="margin-left: 60px;left: auto;top: 300px;" id="floater">
+    <button pButton type="button" label="Next" (click)="surveysave(step2.value)" class="ui-button-raised ui-button-success"></button>
+    <button pButton type="reset" label="clear" value="Reset" class="ui-button-raised ui-button-warning"></button>
+  </div>
+</form>
+
+<!-- <div class="rating rating2"  *ngSwitchCase = "'Radio'">
                 <div class="ui-g-6 ui-md-6 ui-lg-7">
                     <p-radioButton name="group1" value="Option 3"  [(ngModel)]="val1" inputId="opt3" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
                     <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
@@ -182,7 +225,7 @@
                   <p-radioButton name="group1" value="Option 4"  [(ngModel)]="val1" inputId="opt4" class="ui-g-6 ui-md-3 ui-lg-2"></p-radioButton><input type="text" pInputText class="ui-g-6 ui-md-3 ui-lg-4">
                 </div>
                 </div> -->
-        <!-- <div class="p-grid" style="margin-top: .5em">
+<!-- <div class="p-grid" style="margin-top: .5em">
              <div class="p-col ui-g-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'">
                 <div class="box" style="height: 200px;">
                   <div class="ui-g-12 ui-md-6 ui-lg-12" style="padding-left: 250px;">
@@ -202,8 +245,8 @@
         </div> -->
 
 
-  
-  <!-- <div >
+
+<!-- <div >
     <div class="container" > 
       <div class="widget">
          <button class="detractor">1</button>
@@ -236,8 +279,8 @@
       </div>      
    </div>
   </div> -->
-            
-    <!-- <div class="customize-radio" *ngSwitchCase="Smileys">
+
+<!-- <div class="customize-radio" *ngSwitchCase="Smileys">
         <label for="hahaha">
         <input type="radio" name="smiley" id="hahaha">
         <span class="haha-img"></span>
@@ -255,8 +298,8 @@
         </label>
     </div> -->
 
-    
-        <!-- <div class="big smiley" *ngSwitchCase="Smileys">
+
+<!-- <div class="big smiley" *ngSwitchCase="Smileys">
         <input  type="radio" name="emotion"  id="sad" class="input-hidden" />
 <label for="sad">
   <img  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi9_gPfnNpPdllRu6W2n3lx-Xo-b6N_W5QdDzgZMONeLpod9Jj" 
@@ -267,7 +310,7 @@
     alt="I'm happy" /></label>
   </div> -->
 
-	<!-- <div class="rating" *ngIf = "Star Rating">
+<!-- <div class="rating" *ngIf = "Star Rating">
     <input name="stars" id="e5" type="radio"><label for="e5">☆</label>
 		<input name="stars" id="e4" type="radio"><label for="e4">☆</label>
     <input name="stars" id="e3" type="radio"><label for="e3">☆</label>
@@ -275,5 +318,3 @@
 		<input name="stars" id="e1" type="radio"><label for="e1">☆</label>
 	</div> -->
 <!-- animated stars-->
-
- 

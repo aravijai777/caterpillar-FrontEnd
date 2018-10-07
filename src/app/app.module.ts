@@ -21,9 +21,10 @@ import {SliderModule} from 'primeng/slider';
 import {CheckboxModule} from 'primeng/checkbox';
 // import { Observable } from 'rxjs/Rx';
 // import { map } from 'rxjs/operators';
-import 'rxjs/add/operator/map';
-import 'rxjs/Rx';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/Rx';
 import { HttpModule } from '@angular/http';
+import { AddSurveyService } from './services/addSurvey/add-survey.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { HttpModule } from '@angular/http';
       {path:'create', component: CreatesurveyComponent},
     ])
   ],
-  providers: [MessageService],
+  providers: [MessageService,AddSurveyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
