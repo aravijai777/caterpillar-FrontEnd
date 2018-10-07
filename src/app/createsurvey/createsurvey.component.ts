@@ -190,17 +190,17 @@ export class CreatesurveyComponent implements OnInit {
     };
     next(val) {
         console.log(val);
-        this.feed = {
+        let feed = {
             "surveyName": val.surveyName,
             "description": val.description,
             "theme": val.theme
         }
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.http.post("https://directed-will-207311.appspot.com/api/survey", this.feed)
-            .subscribe(() => {
-                console.log(this.feed);
-                this.getSurvey();
+        this.addSurveyService.createSurvey(feed).subscribe((res:any) => {
+                console.log(res);
+                // this.getSurvey();
+                this.surveyId=res._id;
                 this.activeIndex = 1;
                 this.addColumn();
         })
@@ -221,16 +221,20 @@ export class CreatesurveyComponent implements OnInit {
     }
     //getting survey ID
     getSurvey(){
-      this.addSurveyService.getSurveyId().subscribe((res : any[]) => {
-      this.masters = res;
-      this.surveyId = this.masters[0]._id;
-      });
+    //   this.addSurveyService.getSurveyId().subscribe((res : any[]) => {
+    //   this.masters = res;
+    //   this.surveyId = this.masters[0]._id;
+    //   });
     }
     addColumn() {
         this.columns.push({ order: this.columns.length, type: this.cities[0], title: '', options: [], optional: true });
     }
-    removeColumn() {
-        this.columns.splice(-1, 1);
+    removeColumn(question:any) {
+        console.log(question);
+        this.columns=this.columns.filter((el)=>el.order!=question.order);
+        this.columns.forEach((el,i)=>{
+            el.order=i;
+        })
     }
     back(){
         this.activeIndex = 0;

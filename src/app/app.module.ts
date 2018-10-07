@@ -19,6 +19,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import {SliderModule} from 'primeng/slider';
 import {CheckboxModule} from 'primeng/checkbox';
+import {CardModule} from 'primeng/card';
 // import { Observable } from 'rxjs/Rx';
 // import { map } from 'rxjs/operators';
 // import 'rxjs/add/operator/map';
@@ -48,6 +49,7 @@ import { AddSurveyService } from './services/addSurvey/add-survey.service';
     DropdownModule,
     SliderModule,
     CheckboxModule,
+    CardModule,
     RouterModule.forRoot([
       {path:'create', component: CreatesurveyComponent},
     ])
