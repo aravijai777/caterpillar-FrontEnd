@@ -99,7 +99,7 @@
             <a href="#2" title="Give 2 stars">★</a>
             <a href="#1" title="Give 1 stars">★</a>
           </div>
-          <div class="sg-question-options" *ngSwitchCase="'Agree/Disagree'">
+          <!-- <div class="sg-question-options" *ngSwitchCase="'Agree/Disagree'">
             <div class="sg-rating-scale">
               <table class="sg-rating-scale-7">
                 <thead>
@@ -147,7 +147,7 @@
                 </tbody>
               </table>
             </div>
-          </div>
+          </div> -->
 
           <div *ngSwitchCase="'yes/No'" style="margin-top: 100px;">
 
@@ -233,6 +233,14 @@
           </div>
           <div *ngSwitchCase="'Text box'">
             <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="height: 40px;" disabled>
+          </div>
+          <div *ngSwitchCase="'Agree/Disagree'">
+            <button class="like-button">
+              <i class="fa fa-thumbs-up fa-5x like-icon"></i>
+            </button>
+            <button class="like-button">
+              <i class="fa fa-thumbs-down fa-5x like-icon"></i>
+            </button>
           </div>
         </div>
       </div>

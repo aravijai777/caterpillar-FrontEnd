@@ -106,6 +106,9 @@ export class CreatesurveyComponent implements OnInit {
         ];
     }
     ngOnInit() {
+        $('.like-button').on('click', function() {
+            $(this).toggleClass('liked')
+          })
         //btn float
         $(window).scroll(function () {
             // var winScrollTop = $(window).scrollTop();
@@ -197,13 +200,13 @@ export class CreatesurveyComponent implements OnInit {
         }
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.addSurveyService.createSurvey(feed).subscribe((res:any) => {
-                console.log(res);
+       // this.addSurveyService.createSurvey(feed).subscribe((res:any) => {
+           //     console.log(res);
                 // this.getSurvey();
-                this.surveyId=res._id;
+              //  this.surveyId=res._id;
                 this.activeIndex = 1;
                 this.addColumn();
-        })
+     //   })
     }
     surveysave() {
         // console.log(pass);
@@ -267,6 +270,10 @@ export class CreatesurveyComponent implements OnInit {
             })
 
         });
+        //agree/disagree
+        $('.like-button').on('click', function() {
+            $(this).toggleClass('liked')
+          })
     }
     // closebtn(){
     //     $(document).ready(function(c) {
