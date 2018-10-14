@@ -1091,9 +1091,6 @@ div {
 
 
 //agree/disagree
-body {
-    background: red;
-  }
   
   .like-button {
     background: none;
@@ -1109,6 +1106,7 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     transition: 500ms ease;
+    margin-top:25px;
   }
   
   .like-icon {
@@ -1121,9 +1119,9 @@ body {
     }
   }
   
-  .liked  {
+  .disliked  {
     & > .like-icon {
-      animation: like 300ms forwards;
+      animation: dislike 300ms forwards;
     }
   }
   
@@ -1133,6 +1131,39 @@ body {
     transition: 300ms;
   }
   
+  @keyframes dislike {
+    0% {
+      transform: translate(0, 0);
+      -webkit-filter: blur(0px);
+    }
+    49% {
+      -webkit-filter: blur(5px);
+      transform: translate(0, -150%);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    51% {
+    //  color: #09f;
+     color: red;
+      opacity: 1;
+      transform: translate(0, 150%);
+      -webkit-filter: blur(5px);
+    }
+    
+    100% {
+    //  color: #09f;
+    color: red;
+      transform: translate(0, 0);
+      -webkit-filter: blur(0px);
+    }
+  }
+  .liked  {
+    & > .like-icon {
+      animation: like 300ms forwards;
+    }
+  }
   @keyframes like {
     0% {
       transform: translate(0, 0);
@@ -1147,16 +1178,16 @@ body {
       opacity: 0;
     }
     51% {
-     // color: #09f;
-     color: red;
+     color: #09f;
+    //  color: red;
       opacity: 1;
       transform: translate(0, 150%);
       -webkit-filter: blur(5px);
     }
     
     100% {
-    //  color: #09f;
-    color: red;
+     color: #09f;
+    // color: red;
       transform: translate(0, 0);
       -webkit-filter: blur(0px);
     }

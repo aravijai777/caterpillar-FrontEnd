@@ -162,19 +162,19 @@
             {{jqueryfun()}}
             <!-- <form> -->
             <div id="first">
-              <input type="text" [(ngModel)]="col.options[1]" pInputText class="ui-g-6 ui-md-3 ui-lg-4"
+              <input type="text" [(ngModel)]="col.options[0]" pInputText class="ui-g-6 ui-md-3 ui-lg-4"
                 [ngModelOptions]="{standalone: true}">
               <input type="range" id="sliderOne" name="slider1" min=0 max=10 value=0>
               <div class="score" id="ratingOne">0</div>
             </div>
             <div id="second">
-              <input type="text" [(ngModel)]="col.options[2]" pInputText class="ui-g-6 ui-md-3 ui-lg-4"
+              <input type="text" [(ngModel)]="col.options[1]" pInputText class="ui-g-6 ui-md-3 ui-lg-4"
                 [ngModelOptions]="{standalone: true}">
               <input type="range" id="sliderTwo" name="slider2" min=0 max=10 value=0>
               <div class="score" id="ratingTwo">0</div>
             </div>
             <div id="third">
-              <input type="text" [(ngModel)]="col.options[3]" pInputText class="ui-g-6 ui-md-3 ui-lg-4"
+              <input type="text" [(ngModel)]="col.options[2]" pInputText class="ui-g-6 ui-md-3 ui-lg-4"
                 [ngModelOptions]="{standalone: true}">
               <input type="range" id="sliderThree" name="slider3" min=0 max=10 value=0>
               <div class="score" id="ratingThree">0</div>
@@ -235,12 +235,15 @@
             <input id="input" type="text" size="30" pInputText [(ngModel)]="text" style="height: 40px;" disabled>
           </div>
           <div *ngSwitchCase="'Agree/Disagree'">
-            <button class="like-button">
-              <i class="fa fa-thumbs-up fa-5x like-icon"></i>
+          <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align:center;margin-top: 45px">
+            <button class="like-button" (click)="likeClicked()" [ngClass]="{'disliked':liked,'liked':!liked}">
+              <i class="fa fa-3x like-icon" [ngClass]="{'fa-thumbs-up':!liked,'fa-thumbs-down':liked}"></i>
             </button>
-            <button class="like-button">
+            <label style="font-size: xx-large;font-style: italic;">{{liked?'Disagree':'Agree'}}</label>
+          </div>
+            <!-- <button class="like-button">
               <i class="fa fa-thumbs-down fa-5x like-icon"></i>
-            </button>
+            </button> -->
           </div>
         </div>
       </div>

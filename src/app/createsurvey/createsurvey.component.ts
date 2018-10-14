@@ -87,6 +87,7 @@ export class CreatesurveyComponent implements OnInit {
     selectedCar1: car;
     private headers = new Headers({ 'Content-Type': 'application/json' });
     surveyId: any;
+    liked: boolean;
     constructor(private http: Http, private messageService: MessageService,private addSurveyService:AddSurveyService) {
         this.cars = [
             { label: 'Default', value: 'dark' }
@@ -270,10 +271,7 @@ export class CreatesurveyComponent implements OnInit {
             })
 
         });
-        //agree/disagree
-        $('.like-button').on('click', function() {
-            $(this).toggleClass('liked')
-          })
+        //agree/disagre
     }
     // closebtn(){
     //     $(document).ready(function(c) {
@@ -284,4 +282,7 @@ export class CreatesurveyComponent implements OnInit {
     //         });	
     //     });
     // }
+    likeClicked(){
+        this.liked=!this.liked;
+    }
 }
