@@ -1,2 +1,350 @@
 /* You can add global styles to this file, and also import other style files */
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+body {
+    background-color: #eee;
+}
+
+.card.card-cascade .view.gradient-card-header {
+    padding: 1rem 1rem;
+    text-align: center;
+}
+
+.card.card-cascade h3, 
+.card.card-cascade h4, 
+{
+margin-bottom: 0px;
+}
+.blue-gradient {
+    background: -webkit-linear-gradient(50deg, #45cafc, #303f9f);
+    background: linear-gradient(40deg, #45cafc, #4285f4);
+}
+.sidebar-fixed{height:100vh;width:270px;-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);z-index:1050;background-color:#fff;padding:0 1.5rem 1.5rem}.sidebar-fixed .list-group .active{-webkit-box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);box-shadow:0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);-webkit-border-radius:5px;border-radius:5px}.sidebar-fixed .logo-wrapper{padding:2.5rem}.sidebar-fixed .logo-wrapper img{max-height:50px}@media (min-width:1200px){.navbar,.page-footer,main{padding-left:270px}}@media (max-width:1199.98px){.sidebar-fixed{display:none}}
+// @import "https://fonts.googleapis.com/css?family=Montserrat:600";
+
+
+.ion-arrow-down-b
+{
+    color:white !important;
+}
+body{
+    color:black!important;
+    font-family: montserrat !important;
+    font-size: 11px !important;
+    } 
+   .ui-widget {
+    font-family: montserrat !important;
+    font-size: 11px !important;
+    } 
+/* .ui-datepicker
+{
+    width: 20em !important;
+} */
+.dropdown-menu
+{
+    font-size: 13px !important;
+}
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button
+{
+    font-family: montserrat !important;
+    font-size: 11px !important;
+}
+.navbar-brand{
+    font-size: 13px !important;
+}
+.ui-progress-spinner
+{
+    z-index:9999999!important;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%); 
+}
+
+.app-name{
+    font-size: 20px !important;
+}.footer
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    color: white;
+    background-color: #f5f5f5;
+}
+
+.nav-item
+{
+    font-size: 13px !important;
+}
+
+.ui-growl{
+    z-index:99999999 !important;
+}
+
+.navbar-name
+{
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 13px;
+    line-height: inherit;
+    white-space: nowrap;
+}
+.card-body
+{
+    height:520px;
+    padding: 10px;  
+}
+
+.card-header
+{
+    font-size: 13px !important;
+}
+
+.bg-red
+{
+    background-color: #AA1727 !important;
+}
+/* .btn{
+    padding:.1rem .50rem !important
+} */
+::-webkit-input-placeholder {
+    font-size: 11px !important;
+    color: #c4bfbf !important ;
+    text-align: left !important;
+    opacity: 2 !important;
+    padding:2px;
+   
+   }
+  
+  .ui-g-12 {
+      padding:.25em !important;
+  }
+
+  textarea
+  {
+    height: 100px !important ;
+  }
+  /* .ui-dialog-content 
+  {
+      min-height:250px !important;
+  }  */
+  .ui-fileupload{
+    background: linear-gradient(to bottom, #718294 0%, #b2babe 100%);
+  }
+  .dd-height
+  {
+      height:30px !important;
+  }
+  .ui-radiobutton, .ui-radiobutton-label 
+  {
+    margin-bottom: 0px !important;
+      padding: 2px;
+  }
+  
+  .ui-fileupload .ui-button
+  {
+  float:left !important; 
+  
+  }
+  .ui-dropdown .ui-dropdown-label 
+  {
+      text-align:left;
+  }
+ 
+    .ui-autocomplete-panel
+  {
+     width:90% !important;
+    min-width:90% !important;
+  } 
+  .ui-fileupload-buttonbar{
+  height:35px !important;
+  margin-left: 77.8% !important;
+  margin-right: 0% !important; 
+  }
+.fa-pos
+{
+    position: relative;
+    z-index: 1;
+   right:25px;
+    color: #7B7B7B;
+    cursor:pointer;
+    width: 0;
+}
+
+.form-control
+{
+    font-size:12px !important;
+
+}
+.padding-5
+{
+padding:5px;
+}
+/* .ui-calendar.ui-calendar-w-btn .ui-inputtext {
+    width:100% !important;
+} */
+/* .ui-datepicker
+{
+    width:16%;
+} */
+/* .container-fluid 
+{
+    padding-left: 10px !important;
+    
+} */
+.ui-inputtext
+{
+background-color: white;
+width:90%;
+color:black !important;
+padding: .25em !important;
+}
+
+.ui-table-scrollable-body{
+    border: 1px solid #D5D5D5;
+    min-height: 150px ;
+
+    }
+
+    #insattaudit .ui-table-scrollable-body{
+        border: 0px !important;
+        min-height: 250px !important;
+    }
+.adv-panel
+    {
+        background: linear-gradient(to bottom, #606d7b 0%, #9ea5a9 100%) ;
+    }
+.badge
+{
+    color:white;
+    padding: .6em .5em;
+    font-size: 11px;
+}
+
+.ng-star-inserted > input {
+    background-color: white !important;
+    color: black !important;
+    width: 90% !important;
+
+ }
+
+.ui-table-caption
+{
+    background: linear-gradient(to bottom, #606d7b 0%, #9ea5a9 100%);
+}
+
+.ui-dialog-titlebar 
+{
+    background: linear-gradient(to bottom, #606d7b 0%, #9ea5a9 100%);
+    color:white;
+    padding: .5em .75em !important;
+}
+
+#inspReceipts .ui-tabview.ui-tabview-top>.ui-tabview-nav {
+    background: linear-gradient(to bottom, #606d7b 0%, #9ea5a9 100%);
+}
+
+th
+{
+text-align: center;
+}
+
+
+
+#tab .ui-tabview-nav
+{
+    background: linear-gradient(to bottom, #606d7b 0%, #9ea5a9 100%) !important;
+    color:white;
+    /* padding: .5em .75em !important; */
+
+}
+.ui-fluid .ui-inputtext {
+    width:90%;
+    height:25px;
+    padding:.25em !important;
+}
+
+/* .ui-calendar .ui-calendar-button {
+    width:2.5em !important;
+} */
+.alert-font
+{
+    font-size:10px !important;
+}
+.col-padding
+{
+    padding:.70em .5em !important;
+}
+
+.mandatory{
+    color:red;
+}
+.ui-inputtext:disabled, .ui-widget:disabled{
+background-color: #e9ecef;
+opacity: 1;
+color: #495057 !important;
+padding:10px !important;
+border-color: #d6d6dd;
+}
+.form-control{
+    width:90%;
+    height:25px;
+   border-color: #d6d6dd;
+}
+.navbar-name
+{
+    margin-right: 5px !important;
+}
+.btn-group-sm>.btn, .btn-sm{
+    font-size: 12px;
+}
+
+
+
+
+
+
+
+/* cyrillic-ext */
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_bZF3gTD_u50.woff2) format('woff2');
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+  }
+  /* cyrillic */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_bZF3g3D_u50.woff2) format('woff2');
+    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+  /* vietnamese */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_bZF3gbD_u50.woff2) format('woff2');
+    unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
+  }
+  /* latin-ext */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_bZF3gfD_u50.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), url(https://fonts.gstatic.com/s/montserrat/v12/JTURjIg1_i6t8kCHKm45_bZF3gnD_g.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }

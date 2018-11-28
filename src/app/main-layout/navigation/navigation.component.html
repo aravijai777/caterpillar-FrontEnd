@@ -1,0 +1,83 @@
+<!--Main Navigation-->
+<header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-fixed position-fixed">
+
+        <a class="logo-wrapper waves-effect">
+            <img src="../../../../assets/img/angular-mdb.png" class="img-fluid" alt="">
+        </a>
+
+        <div class="list-group list-group-flush">
+
+            <a routerLink="dashboards/v1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-pie-chart mr-3"></i>Dashboard
+            </a>
+                <!-- <a routerLink="profiles/profile1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                    <i class="fa fa-user mr-3"></i>Profile</a> -->
+            <a routerLink="tables/table1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-table mr-3"></i>Tables</a>
+            <a routerLink="maps/map1" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-map mr-3"></i>Maps</a>
+            <a routerLink="nonExistingPath" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+                <i class="fa fa-exclamation mr-3"></i>404</a>
+
+        </div>
+
+    </div>
+    <!-- Sidebar -->
+
+    <!--Navbar-->
+    <mdb-navbar [containerInside]="false" SideClass="navbar navbar-expand-lg navbar-light white">
+
+        <!-- Navbar brand -->
+        <logo class="ml-3">
+            <a class="navbar-brand" href="#">
+                <strong class="blue-text">Bawa</strong>
+            </a>
+        </logo>
+
+        <!-- Collapsible content -->
+        <links>
+
+            <!-- Links -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" mdbWavesEffect>Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            <!-- Links -->
+            </ul>
+            <!-- Search form -->
+            <ul class="navbar-nav nav-flex-icons">
+
+                    <li class="nav-item">
+                        <a href="https://www.facebook.com/mdbootstrap" class="nav-link" target="_blank" mdbWavesEffect>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://twitter.com/MDBootstrap" class="nav-link" target="_blank" mdbWavesEffect>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light"
+                            target="_blank" mdbWavesEffect>
+                            <i class="fa fa-github mr-2"></i>MDB GitHub
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="https://mdbootstrap.com/product/angular-bootstrap-pro/" class="ml-1 nav-link border border-light rounded" mdbWavesEffect>
+                        <i class="fa fa-diamond left"></i> Go Pro</a>
+                    </li>
+                </ul>
+        </links>
+        <!-- Collapsible content -->
+
+    </mdb-navbar>
+    <!--/.Navbar-->
+
+</header>
+<!--Main Navigation-->

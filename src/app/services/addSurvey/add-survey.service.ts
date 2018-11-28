@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AddSurveyService {
 
   private _addQuestionsURL:string='https://directed-will-207311.appspot.com/api/questions/addQuestions';
-  private _createSurveyURL:string = 'https://directed-will-207311.appspot.com/api/survey';
-
+  private _createSurveyURL:string = 'http://localhost:4040/api/survey';
+  //http://localhost:4040/api/survey
+  // https://directed-will-207311.appspot.com/api/survey
   constructor(private http:HttpClient) { }
 
   addQuestions(postParam:any){
@@ -21,6 +20,8 @@ export class AddSurveyService {
   createSurvey(postParam:any){
     return this.http.post(this._createSurveyURL,postParam);
   }
-
+   dashboard(){
+    return this.http.get(this._createSurveyURL);
+   }
 
 }

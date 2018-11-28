@@ -1,0 +1,63 @@
+<p>
+  dashboard works!
+</p>
+<!-- TurboTable with lazy Loading -->
+<p-table #inspAttr [columns]="cols" [frozenColumns]="frozenCols" [value]="attributes" [totalRecords]="totalRecords" [paginator]="true"
+[rows]="10" [scrollable]="true"  [lazy]="true" (onLazyLoad)="LazyLoadEvent($event)"   [rowsPerPageOptions]="[10,25,50]" >
+  <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let cols of columns" [pSortableColumn]="cols.field" >{{cols.header}}</th>      
+            </tr>
+    <tr>
+            <th ></th>
+        <th >
+            <i class="fa-pos fa-stack fa fas fa-close fa-fw pull-right" (click)="clear1=null;inspAttr.filter('','Column1','')"></i>
+            <input type="text" [(ngModel)]="clear1" class=" ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder="FILTER"
+                (keyup.enter)="inspAttr.filter($event.target.value,'Column1','')" [style]="{'width':'50%'}">
+        </th>
+        <th >
+            <i class="fa-pos fa-stack fa fas fa-close fa-fw pull-right" (click)="clear2=null;inspAttr.filter('','Column2','')"></i>
+            <input type="text" [(ngModel)]="clear2" class=" ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder="FILTER"
+                (keyup.enter)="inspAttr.filter($event.target.value,'Column2','equals')">
+        </th>
+         <th >
+            <i class="fa-pos fa-stack fa fas fa-close fa-fw pull-right" (click)="clear3=null;inspAttr.filter('','Column3','')"></i>
+            <input type="text" [(ngModel)]="clear3" class=" ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder="FILTER"
+                (keyup.enter)="inspAttr.filter($event.target.value,'Column3','')">
+        </th>
+        <th >
+            <i class="fa-pos fa-stack fa fas fa-close fa-fw pull-right" (click)="clear4=null;inspAttr.filter('','Column4','')"></i>
+            <input type="text" [(ngModel)]="clear4" class=" ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder="FILTER"
+                (keyup.enter)="inspAttr.filter($event.target.value,'Column4','')">
+        </th>
+        <!-- <th >
+            <i class="fa-pos fa-stack fa fas fa-close fa-fw pull-right" (click)="clear4=null;inspAttr.filter('','Column5','')"></i>
+            <input type="text" [(ngModel)]="clear5" class=" ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder="FILTER"
+                (keyup.enter)="inspAttr.filter($event.target.value,'Column5','')">
+        </th> -->
+      <!--  <th >
+            <i class="fa-pos fa-stack fa fas fa-close fa-fw pull-right" (click)="clear4=null;inspAttr.filter('','Column6','')"></i>
+            <input type="text" [(ngModel)]="clear6" class=" ui-inputtext ui-widget ui-state-default ui-corner-all" placeholder="FILTER"
+                (keyup.enter)="inspAttr.filter($event.target.value,'Column6','')">
+        </th> -->
+    </tr>
+</ng-template>
+<ng-template pTemplate="body" let-inspectionAttr let-columns="columns" let-rowIndex="rowIndex">
+    <tr [pSelectableRow]="inspectionAttr">
+        <td  [ngClass]="{'col-padding':col.field!='Column11'}" *ngFor="let col of columns">
+            <span *ngIf='col.field=="Column11"'>
+                <p-button type="button" class="btn btn-sm btn-info" style="margin-left:0px !important;"  [routerLink]="['/editSurvey',attributes[rowIndex]._id]" routerLinkActive="active">
+                    <span class="fa fa-pencil-square-o"></span></p-button>
+                    <p-button type="button" class="btn btn-sm btn-danger" style="float:right;"  (click)="onDelete(inspectionAttr)" >
+                            <span class="fa fa-trash"></span></p-button>
+            </span>
+            <span *ngIf='col.field!="Column11"'> {{inspectionAttr[col.field]}} </span>
+            <!-- <span *ngFor="let col of columns"> {{inspectionAttr[col.field]}}</span> -->
+            <!-- <span *ngIf='col.field=="Column10"||col.field=="Column9"'>{{inspectionAttr[col.field] | date:'dd-MMM-yyyy'}} </span> -->
+        </td>
+    </tr>
+</ng-template>
+<ng-template pTemplate="paginatorright">
+    <span>Views: {{first+1}} - {{rows+first}} of {{totalRecords}} </span>
+    </ng-template>
+</p-table>

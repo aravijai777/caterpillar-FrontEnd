@@ -1,60 +1,64 @@
+import { AgmCoreModule } from '@agm/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { FormsModule , ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import {ToolbarModule} from 'primeng/toolbar';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SplitButtonModule} from 'primeng/splitbutton';
-import { RouterModule, Routes, Router ,ActivatedRoute } from '@angular/router';
-import { CreatesurveyComponent } from './createsurvey/createsurvey.component';
-import {StepsModule} from 'primeng/steps';
-import { MessageService } from '../../node_modules/primeng/api';
-import {ToastModule} from 'primeng/toast';
-import { trigger, state, style, transition } from '@angular/animations';
-import {RadioButtonModule} from 'primeng/radiobutton';
-import { DropdownModule } from 'primeng/dropdown';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import {SliderModule} from 'primeng/slider';
-import {CheckboxModule} from 'primeng/checkbox';
-import {CardModule} from 'primeng/card';
-// import { Observable } from 'rxjs/Rx';
-// import { map } from 'rxjs/operators';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/Rx';
-import { HttpModule } from '@angular/http';
+import { AppRoutes } from './app.routes.service';
+import { ViewsModule } from './views/views.module';
+import { SharedModule } from './shared/shared.module';
+import { ErrorModule } from './views/errors/error.module';
+
+// main layout
+import { NavigationModule } from './main-layout/navigation/navigation.module';
 import { AddSurveyService } from './services/addSurvey/add-survey.service';
+import { HttpClientModule } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
+import {StepsModule} from 'primeng/steps';
+import {ToastModule} from 'primeng/toast';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {CardModule} from 'primeng/card';
+import {DropdownModule} from 'primeng/dropdown';
+import {CheckboxModule} from 'primeng/checkbox';
+import {PaginatorModule} from 'primeng/paginator';
+import {TableModule} from 'primeng/table';
+import { DashboardComponent } from './views/dashboard/dashboard.component';
+import { EditSurveyComponent } from './views/edit-survey/edit-survey.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    CreatesurveyComponent
+    DashboardComponent,
+    EditSurveyComponent
   ],
   imports: [
+    AgmCoreModule.forRoot({
+      apiKey: ''
+    }),
     BrowserModule,
-    FormsModule ,
-    HttpModule,
-    HttpClientModule, 
-    ReactiveFormsModule,
-    AngularFontAwesomeModule,
     BrowserAnimationsModule,
-    SplitButtonModule,
-    ToolbarModule,
+    NavigationModule,
+    AppRoutes,
+    RouterModule,
+    FormsModule,
+    SharedModule,
+    ViewsModule,
+    ErrorModule, 
+    ReactiveFormsModule,
+    HttpClientModule,
     StepsModule,
     ToastModule,
     RadioButtonModule,
     DropdownModule,
-    SliderModule,
+    PaginatorModule,
     CheckboxModule,
+    TableModule,
     CardModule,
-    RouterModule.forRoot([
-      {path:'create', component: CreatesurveyComponent},
-    ])
   ],
-  providers: [MessageService,AddSurveyService],
-  bootstrap: [AppComponent]
+  providers: [AddSurveyService, MessageService],
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class AppModule { }

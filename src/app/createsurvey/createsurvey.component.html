@@ -93,11 +93,13 @@
             </div>
           </div>
           <div class="rating rating2" *ngSwitchCase="'Star Rating'">
-            <a href="#5" title="Give 5 stars">★</a>
-            <a href="#4" title="Give 4 stars">★</a>
-            <a href="#3" title="Give 3 stars">★</a>
-            <a href="#2" title="Give 2 stars">★</a>
-            <a href="#1" title="Give 1 stars">★</a>
+          <div class="ui-g-12 ui-md-12 ui-lg-12" style="text-align:center;margin-top: 45px" >
+            <a  title="Give 5 stars">★</a>
+            <a  title="Give 4 stars">★</a>
+            <a  title="Give 3 stars">★</a>
+            <a  title="Give 2 stars">★</a>
+            <a  title="Give 1 stars">★</a>
+          </div>
           </div>
           <!-- <div class="sg-question-options" *ngSwitchCase="'Agree/Disagree'">
             <div class="sg-rating-scale">
@@ -159,7 +161,7 @@
           </div>
           <!-- slider smiley -->
           <div id="container" *ngSwitchCase="'Slider'" style="height: 300px;margin-top: 90px;margin-bottom: 30px;padding-bottom: 0px;padding-top: 0px;">
-            {{jqueryfun()}}
+            <!-- {{jqueryfun()}} -->
             <!-- <form> -->
             <div id="first">
               <input type="text" [(ngModel)]="col.options[0]" pInputText class="ui-g-6 ui-md-3 ui-lg-4"
@@ -183,7 +185,7 @@
             <!-- </form>  -->
           </div>
           <div class="container" *ngSwitchCase="'NPS Rating (1-10)'">
-            {{jqueryfun()}}
+            <!-- {{jqueryfun()}} -->
             <div class="widget">
               <button class="detractor">1</button>
               <button class="detractor">2</button>
@@ -241,9 +243,6 @@
             </button>
             <label style="font-size: xx-large;font-style: italic;">{{liked?'Disagree':'Agree'}}</label>
           </div>
-            <!-- <button class="like-button">
-              <i class="fa fa-thumbs-down fa-5x like-icon"></i>
-            </button> -->
           </div>
         </div>
       </div>

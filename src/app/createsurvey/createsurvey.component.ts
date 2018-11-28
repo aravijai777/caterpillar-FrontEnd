@@ -201,13 +201,13 @@ export class CreatesurveyComponent implements OnInit {
         }
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-       // this.addSurveyService.createSurvey(feed).subscribe((res:any) => {
-           //     console.log(res);
-                // this.getSurvey();
-              //  this.surveyId=res._id;
+       this.addSurveyService.createSurvey(feed).subscribe((res:any) => {
+               console.log(res);
+                this.getSurvey();
+               this.surveyId=res._id;
                 this.activeIndex = 1;
                 this.addColumn();
-     //   })
+       })
     }
     surveysave() {
         // console.log(pass);
