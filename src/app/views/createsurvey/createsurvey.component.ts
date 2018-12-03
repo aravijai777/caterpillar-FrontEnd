@@ -52,6 +52,7 @@ interface car {
     }
 })
 export class CreatesurveyComponent implements OnInit {
+    editSurvey: any;
     masters: any;
     feed: object = {};
     dropval: any;
@@ -101,15 +102,16 @@ export class CreatesurveyComponent implements OnInit {
         this.route.params.subscribe( params =>{ 
             this.sur_id = params;
             console.log(this.sur_id);
-            this.addSurveyService.dashboard().subscribe(res => {
+            this.addSurveyService.editSurvey().subscribe(res => {
                 this.attributes = res;
                 console.log(this.attributes);
                 for(var j = 0; j < this.attributes.length; j++){
-                    console.log(this.attributes[j]._id );
+                    console.log(this.attributes[j].survey );
                         console.log(this.sur_id._id);
-                    if(this.attributes[j]._id == this.sur_id._id ){
-                        console.log(this.attributes[j]._id );
-                        console.log(this.attributes[j]);
+                    if(this.attributes[j].survey == this.sur_id._id ){
+                        console.log(this.attributes[j].survey );
+                        this.editSurvey = this.attributes[j];
+                        console.log(this.editSurvey);
                     this.activeIndex = 1;
                     }
                   }
@@ -211,13 +213,13 @@ export class CreatesurveyComponent implements OnInit {
         }
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
-    //    this.addSurveyService.createSurvey(feed).subscribe((res:any) => {
-            //    console.log(res);
-                // this.getSurvey();
-            //    this.surveyId=res._id;
+       this.addSurveyService.createSurvey(feed).subscribe((res:any) => {
+               console.log(res);
+                this.getSurvey();
+               this.surveyId=res._id;
                 this.activeIndex = 1;
                 this.addColumn();
-    //    })
+       })
     }
     surveysave() {
         // console.log(pass);

@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   sortField: string;
 
   pSortOrder: any;
-  attributes: Object = {};
+  attributes: any;
   constructor(private addSurveyService:AddSurveyService) { }
 
   ngOnInit() {
