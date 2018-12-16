@@ -23,7 +23,7 @@ const routes: Route[] = [
     ]
   },
   { path: 'modals', component: ModalsComponent},
-  { path: 'editSurvey/:_id', component: CreatesurveyComponent},
+  { path: 'editSurvey/:_id', component: EditSurveyComponent},
  // { path: '**', component: NotFoundComponent },
 //{ path: 'dashboard' ,component: DashboardComponent}
 ];

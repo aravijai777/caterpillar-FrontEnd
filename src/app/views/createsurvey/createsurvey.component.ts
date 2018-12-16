@@ -99,25 +99,25 @@ export class CreatesurveyComponent implements OnInit {
         ];
     }
     ngOnInit() {
-        this.route.params.subscribe( params =>{ 
-            this.sur_id = params;
-            console.log(this.sur_id);
-            this.addSurveyService.editSurvey().subscribe(res => {
-                this.attributes = res;
-                console.log(this.attributes);
-                for(var j = 0; j < this.attributes.length; j++){
-                    console.log(this.attributes[j].survey );
-                        console.log(this.sur_id._id);
-                    if(this.attributes[j].survey == this.sur_id._id ){
-                        console.log(this.attributes[j].survey );
-                        this.editSurvey = this.attributes[j];
-                        console.log(this.editSurvey);
-                    this.activeIndex = 1;
-                    }
-                  }
-              });
+        // this.route.params.subscribe( params =>{ 
+        //     this.sur_id = params;
+        //     console.log(this.sur_id);
+        //     this.addSurveyService.editSurvey().subscribe(res => {
+        //         this.attributes = res;
+        //         console.log(this.attributes);
+        //         for(var j = 0; j < this.attributes.length; j++){
+        //             console.log(this.attributes[j].survey );
+        //                 console.log(this.sur_id._id);
+        //             if(this.attributes[j].survey == this.sur_id._id ){
+        //                 console.log(this.attributes[j].survey );
+        //                 this.editSurvey = this.attributes[j];
+        //                 console.log(this.editSurvey);
+        //             this.activeIndex = 1;
+        //             }
+        //           }
+        //       });
        
-          });
+        //   });
         $('.like-button').on('click', function() {
             $(this).toggleClass('liked')
           })
@@ -201,7 +201,6 @@ export class CreatesurveyComponent implements OnInit {
         this.onResize();
     }
     dropdownChange(dropval) {
-        //console.log(this.dropval.type.name);
         this.jqueryfun();
     };
     next(val) {
@@ -218,11 +217,10 @@ export class CreatesurveyComponent implements OnInit {
                 this.getSurvey();
                this.surveyId=res._id;
                 this.activeIndex = 1;
-                this.addColumn();
+                this.router.navigate(['/editSurvey/'+this.surveyId])                
        })
     }
     surveysave() {
-        // console.log(pass);
         let questions= JSON.parse(JSON.stringify(this.columns));
         questions.forEach((el)=>{
             el.type=el.type.name;

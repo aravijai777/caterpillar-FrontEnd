@@ -36,10 +36,6 @@ this.addSurveyService.dashboard().subscribe(res => {
       { field: 'theme', header: 'theme' },
       { field: 'url', header: 'url' },
       { field: 'description', header: 'description'}
-      // { field: 'Column3', header: 'Reference Code' },
-      // { field: 'Column4', header: 'Description' },
-      // { field: 'Column5', header: 'Effective From Date' },
-      // { field: 'Column6', header: 'Effective To Date' },
     ];
   }
   /* 
