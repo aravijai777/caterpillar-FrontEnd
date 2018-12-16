@@ -2,15 +2,12 @@ import { Component, OnInit , Optional } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddSurveyService } from 'app/services/addSurvey/add-survey.service';
 import { Http, Headers } from '@angular/http';
-import { MessageService } from 'primeng/api';
+import { MessageService, SelectItem } from 'primeng/api';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 declare var jquery: any;
 declare var $: any;
 
-interface City {
-    name: string,
-    code: string
-}
+
 interface Questions {
     order: number,
     type: any,
@@ -62,8 +59,8 @@ export class EditSurveyComponent implements OnInit {
   masters: any;
   feed: object = {};
   dropval: any;
-  cities: City[];
-  selectedCity: City;
+  cities: SelectItem[];
+  selectedCity: SelectItem;
   activeIndex: number = 0;
   items: any[];
   columns: Questions[] = [];
@@ -94,16 +91,16 @@ export class EditSurveyComponent implements OnInit {
   ];
 
   this.cities = [
-      { name: 'Radio', code: 'Cb' },
-      { name: 'Star Rating', code: 'NY' },
-      { name: 'Smileys', code: 'RM' },
-      { name: 'NPS Rating (1-10)', code: 'LDN' },
-      { name: 'Agree/Disagree', code: 'AGR' },
-      { name: 'Multiple Choice', code: 'IST' },
-      { name: 'yes/No', code: 'PRS' },
-      { name: 'Text box', code: 'PRS' },
-      { name: 'Comment box(Text Area)', code: 'PRS' },
-      { name: 'Slider', code: 'sli' }
+      { label: 'Radio', value: 'Radio' },
+      { label: 'Star Rating', value: 'Star Rating' },
+      { label: 'Smileys', value: 'Smileys' },
+      { label: 'NPS Rating (1-10)', value: 'NPS Rating (1-10)' },
+      { label: 'Agree/Disagree', value: 'Agree/Disagree' },
+      { label: 'Multiple Choice', value: 'Multiple Choice' },
+      { label: 'yes/No', value: 'yes/No' },
+      { label: 'Text box', value: 'Text box' },
+      { label: 'Comment box(Text Area)', value: 'Comment box(Text Area)' },
+      { label: 'Slider', value: 'Slider' }
   ];
   }
 
@@ -244,7 +241,7 @@ dropdownChange(dropval) {
 surveysave() {
   let questions= JSON.parse(JSON.stringify(this.columns));
   questions.forEach((el)=>{
-      el.type=el.type.name;
+      el.type=el.type.value;
   })
   let postParams={
       survey: this.surveyId,
