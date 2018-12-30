@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import {StepsModule} from 'primeng/steps';
 import {ToastModule} from 'primeng/toast';
+import {ButtonModule} from 'primeng/button';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {CardModule} from 'primeng/card';
 import {DropdownModule} from 'primeng/dropdown';
@@ -52,6 +53,7 @@ import { EditSurveyComponent } from './views/edit-survey/edit-survey.component';
     ToastModule,
     RadioButtonModule,
     DropdownModule,
+    ButtonModule,
     PaginatorModule,
     CheckboxModule,
     TableModule,

@@ -46,10 +46,10 @@
     <tr [pSelectableRow]="inspectionAttr">
         <td  [ngClass]="{'col-padding':col.field!='Column11'}" *ngFor="let col of columns">
             <span *ngIf='col.field=="Column11"'>
-                <p-button type="button" class="btn btn-sm btn-info" style="margin-left:0px !important;"  [routerLink]="['/editSurvey',attributes[rowIndex]._id]" routerLinkActive="active">
-                    <span class="fa fa-pencil-square-o"></span></p-button>
-                    <p-button type="button" class="btn btn-sm btn-danger" style="float:right;"  (click)="onDelete(inspectionAttr)" >
-                            <span class="fa fa-trash"></span></p-button>
+                <button type="button" class="btn btn-sm btn-info" style="margin-left:0px !important;"  [routerLink]="['/editSurvey',attributes[rowIndex]._id]" routerLinkActive="active">
+                    <span class="fa fa-pencil-square-o"></span></button>
+                    <button type="button" class="btn btn-sm btn-danger" style="float:right;"  (click)="onDelete(inspectionAttr)" >
+                            <span class="fa fa-trash"></span></button>
             </span>
             <span *ngIf='col.field!="Column11"'> {{inspectionAttr[col.field]}} </span>
             <!-- <span *ngFor="let col of columns"> {{inspectionAttr[col.field]}}</span> -->

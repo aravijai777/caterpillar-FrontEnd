@@ -109,6 +109,7 @@ export class EditSurveyComponent implements OnInit {
       this.sur_id = params._id;
       console.log(this.sur_id);
       this.addSurveyService.editSurvey(this.sur_id).subscribe((res : any) => {  
+          console.log(res);
           this.columns = res.questions;
           console.log(this.columns);
          this.Survey = res.survey;
@@ -127,8 +128,8 @@ export class EditSurveyComponent implements OnInit {
             //   this.activeIndex = 1;
             //   }
          //   }
-        });
- 
+
+        }); 
     });
   $('.like-button').on('click', function() {
       $(this).toggleClass('liked')
@@ -240,11 +241,15 @@ dropdownChange(dropval) {
 // }
 surveysave() {
   let questions= JSON.parse(JSON.stringify(this.columns));
+  console.log(questions);
   questions.forEach((el)=>{
-      el.type=el.type.value;
+    console.log(el);
+      el.type=el.type;
+      console.log(el.type);
   })
+  console.log(questions);
   let postParams={
-      survey: this.surveyId,
+      survey: this.sur_id,
       question:questions,
       is_completed:false
   }
