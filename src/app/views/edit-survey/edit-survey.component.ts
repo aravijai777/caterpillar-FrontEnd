@@ -2,7 +2,9 @@ import { Component, OnInit , Optional } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AddSurveyService } from 'app/services/addSurvey/add-survey.service';
 import { Http, Headers } from '@angular/http';
-import { MessageService, SelectItem } from 'primeng/api';
+import { MessageService, SelectItem, ConfirmationService } from 'primeng/api';
+import { Message } from 'primeng/primeng';
+import {ToastModule} from 'primeng/toast';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 declare var jquery: any;
 declare var $: any;
@@ -84,8 +86,9 @@ export class EditSurveyComponent implements OnInit {
   sur_id: any = {};
   attributes: any = {};
   temp:any;
-
-  constructor(private route: ActivatedRoute,public router: Router,private addSurveyService:AddSurveyService,private messageService: MessageService) { 
+  saveAlert$: string;
+  msgs: Message[];
+  constructor(private route: ActivatedRoute,public router: Router,private addSurveyService:AddSurveyService,private messageService: MessageService,private confirmationService: ConfirmationService) { 
     this.cars = [
       { label: 'Default', value: 'dark' }
   ];
@@ -151,7 +154,6 @@ export class EditSurveyComponent implements OnInit {
       // var top = winScrollTop + winHeight - floaterHeight - fromBottom;
       $('#float').css({ 'top': top + 'px' });
   });
-  this.addColumn();
   //slider smiley
   $(document).ready(function () {
 
@@ -197,14 +199,14 @@ export class EditSurveyComponent implements OnInit {
       }
   },
   {
-      label: 'Payment',
+      label: 'Split Questions',
       command: (event: any) => {
           this.activeIndex = 2;
           this.messageService.add({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
       }
   },
   {
-      label: 'Confirmation',
+      label: 'Final Survey',
       command: (event: any) => {
           this.activeIndex = 3;
           this.messageService.add({ severity: 'info', summary: 'Last Step', detail: event.item.label });
@@ -254,10 +256,34 @@ surveysave() {
       is_completed:false
   }
   console.log(postParams);
-  this.addSurveyService.addQuestions(postParams).subscribe(res=>console.log(res));
+  this.addSurveyService.addQuestions(postParams).subscribe(
+      res=> {this.saveAlert$ = "Success"},
+      err => console.log("error"),
+      () => {
+        setTimeout(() => {
+          if (this.saveAlert$ == "Success") {
+              console.log('enter save');
+            this.messageService.add({ severity: 'Success', summary: 'Success', detail: 'questions updated successfully' });
+          }
+        },1000);
+      this.messageService.add({
+        key: 'c', sticky: true, severity:'info',
+        summary: ' Are you want to Split Questions ?'});
+});
+}
+onConfirm()  {
+    this.messageService.clear('c');
+    this.messageService.add({key:'custom',severity:'success', summary:'Confirmed', detail:'You have accepted splitting'});
+      this.router.navigate(['/split',this.sur_id]);
+}
+onReject() {
+    this.messageService.clear('c');
+    this.messageService.add({key:'custom',severity:'warn', summary:'Rejected', detail:'You have rejected splitting'});
+     // this.router.navigate(['/Organizations/OrganizationsDetails',this.QaID]);
 }
 addColumn() {
-  this.columns.push({ order: this.columns.length, type: this.cities[0], title: '', options: [], optional: true });
+  this.columns.push({ order: this.columns.length, type: 'Radio', title: '', options: [], optional: true });
+  console.log(this.columns);
 }
 removeColumn(question:any) {
   console.log(question);

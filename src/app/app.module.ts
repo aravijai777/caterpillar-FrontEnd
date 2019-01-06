@@ -14,7 +14,7 @@ import { ErrorModule } from './views/errors/error.module';
 import { NavigationModule } from './main-layout/navigation/navigation.module';
 import { AddSurveyService } from './services/addSurvey/add-survey.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import {StepsModule} from 'primeng/steps';
 import {ToastModule} from 'primeng/toast';
 import {ButtonModule} from 'primeng/button';
@@ -26,13 +26,16 @@ import {PaginatorModule} from 'primeng/paginator';
 import {TableModule} from 'primeng/table';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { EditSurveyComponent } from './views/edit-survey/edit-survey.component';
-
+import { SplitComponent } from './views/split/split.component';
+import {AccordionModule} from 'primeng/accordion';
+import {PickListModule} from 'primeng/picklist';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    EditSurveyComponent
+    EditSurveyComponent,
+    SplitComponent
   ],
   imports: [
     AgmCoreModule.forRoot({
@@ -49,6 +52,8 @@ import { EditSurveyComponent } from './views/edit-survey/edit-survey.component';
     ErrorModule, 
     ReactiveFormsModule,
     HttpClientModule,
+    PickListModule,
+    AccordionModule,
     StepsModule,
     ToastModule,
     RadioButtonModule,
@@ -59,7 +64,7 @@ import { EditSurveyComponent } from './views/edit-survey/edit-survey.component';
     TableModule,
     CardModule,
   ],
-  providers: [AddSurveyService, MessageService],
+  providers: [AddSurveyService, MessageService,ConfirmationService],
   bootstrap: [AppComponent],
   schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA ]
 })

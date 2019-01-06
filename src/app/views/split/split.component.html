@@ -20,20 +20,26 @@
     
   <p-toast  [style]="{marginTop: '80px'}" styleClass="custom-toast" key="custom" position="bottom-center"></p-toast>
   <p-steps [model]="items" styleClass="steps-custom" [(activeIndex)]="activeIndex" [style]="{'left': '200px' , 'width': '360px'}"></p-steps>
-  <div *ngIf="activeIndex == 1">
+  <div *ngIf="activeIndex == 2">
     <label style="text-align: center;padding-left: 170px;font-size: 50px;" name="col.title" ngDefaultControl>{{Survey}}</label>
     <!-- <button pButton type="button" label="Back" class="ui-button-danger" (click)="back()" style="left: 600px;"></button> -->
-    <div class="p-grid" style="margin-top: .5em;">
-      <div class="p-col col-md-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'" id="{{'Id'+i}}"
-        style="right:150px;">
-        <div class="box" style="height: auto;min-height: 270px;width: 900px">
-          <button pButton id='close' icon="pi pi-times" (click)='removeColumn(col)' Class="ui-button-danger" style="padding: 0px;bottom: 15px;border: 0px;margin: 0px;"></button>
-          <div class="ui-g-2 ui-md-6 ui-lg-12" style="padding-left: 70px;">
-            <label class="ui-g-2 ui-md-3 ui-lg-1" name="order" #name="ngModel" ngModel ngDefaultControl>{{i + 1}}</label>
+    <p-accordion >
+      
+      <p-accordionTab class="p-col col-md-10" *ngFor="let col of columns; let i=index" [@animation]="'visible'" id="{{'Id'+i}}"
+        style="right:150px;" >
+        <p-header>
+          <label  name="order" #name="ngModel" ngModel ngDefaultControl #ord id="{{i}}">{{i + 1}}</label>
+      </p-header>
+        <div class="box" style="height: auto;min-height: 270px;width: 900px" [disabled]="show">
+          <!-- <button pButton id='close' icon="pi pi-times" (click)='removeColumn(col)' Class="ui-button-danger" style="padding: 0px;bottom: 15px;border: 0px;margin: 0px;"></button> -->
+          <div class="ui-g-2 ui-md-6 ui-lg-12" style="padding-left: 70px;">          
             <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" [(ngModel)]="col.title" class="ui-g-8 ui-md-3 ui-lg-8"
               [ngModelOptions]="{standalone: true}"></textarea>
             <p-checkbox class="ui-g-2 ui-md-3 ui-lg-2" name="optional" label="Mandatory" [(ngModel)]="col.optional"
-              inputId="mandtry" binary="false"></p-checkbox>
+              inputId="mandtry" binary="false" disabled="true"></p-checkbox>
+              <span *ngIf='col.type != "Multiple Choice" && col.type != "Comment box(Text Area)" && col.type != "Text box"'>
+              <button pButton type="button" label="Split" (click)="split(ord.id)" class="ui-button-warning" ></button>
+              </span>
             <p-dropdown class="ui-g-2 ui-md-3 ui-lg-3" [options]="cities" [(ngModel)]="col.type"
                name="drop" (onChange)="dropdownChange(col)" [style]="{'width': '190px'}"></p-dropdown>
           </div>
@@ -156,17 +162,22 @@
               </div>
             </div>
           </div>
+          <p-pickList [source]="splitColumns" [target]="targetColumns" sourceHeader="Available" targetHeader="Selected" [responsive]="true" filterBy="brand" 
+        dragdrop="true" dragdropScope="splitColumns" sourceFilterPlaceholder="Search by brand" targetFilterPlaceholder="Search by brand" [sourceStyle]="{'height':'300px'}" [targetStyle]="{'height':'300px'}">
+    <ng-template  pTemplate="item">
+        <div class="ui-helper-clearfix" >            
+            <div style="font-size:14px;float:right;margin:15px 5px 0 0" *ngFor="let col of splitColumns; let i=index">
+               <textarea rows="2" cols="50" pInputTextarea autoResize="autoResize" [(ngModel)]="col.title" class="ui-g-8 ui-md-3 ui-lg-8"
+              [ngModelOptions]="{standalone: true}"></textarea>
+            </div>
         </div>
-      </div>
-    </div>
-    <!-- <div class="ui-g-2 ui-md-6 ui-lg-4">
-    <div class="ui-g-12 ui-md-10 ui-md-8 ui-md-6 ui-lg-8">
-      <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()" style="margin-right: .5em"></button>
-      <button pButton type="button" icon="pi pi-minus" title="Remove Column" (click)="removeColumn()"></button>
-    </div>
-  </div> -->
-    <div class="" style="right:100px;top: 350px;" id="floater">
-      <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()" style="margin-right: .5em"></button>
+    </ng-template>
+</p-pickList>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+    <div  style="right:50px;top: 350px;" id="floater">
+      <!-- <button pButton type="button" icon="pi pi-plus" title="Add Column" (click)="addColumn()" style="margin-right: .5em"></button> -->
       <button pButton type="button" label="Next" (click)="surveysave()" class="ui-button-raised ui-button-success"></button>
     </div>
   </div>

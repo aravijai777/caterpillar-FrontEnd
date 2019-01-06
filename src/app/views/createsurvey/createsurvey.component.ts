@@ -184,14 +184,14 @@ export class CreatesurveyComponent implements OnInit {
             }
         },
         {
-            label: 'Payment',
+            label: 'Split Questions',
             command: (event: any) => {
                 this.activeIndex = 2;
                 this.messageService.add({ severity: 'info', summary: 'Pay with CC', detail: event.item.label });
             }
         },
         {
-            label: 'Confirmation',
+            label: 'Final Survey',
             command: (event: any) => {
                 this.activeIndex = 3;
                 this.messageService.add({ severity: 'info', summary: 'Last Step', detail: event.item.label });

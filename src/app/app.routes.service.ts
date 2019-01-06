@@ -7,6 +7,7 @@ import { NotFoundComponent } from './views/errors/not-found/not-found.component'
 import {CreatesurveyComponent} from './views/createsurvey/createsurvey.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { EditSurveyComponent } from './views/edit-survey/edit-survey.component';
+import { SplitComponent } from './views/split/split.component';
 
 
 const routes: Route[] = [
@@ -24,6 +25,7 @@ const routes: Route[] = [
   },
   { path: 'modals', component: ModalsComponent},
   { path: 'editSurvey/:_id', component: EditSurveyComponent},
+  {path:'split/:_id',component:SplitComponent}
  // { path: '**', component: NotFoundComponent },
 //{ path: 'dashboard' ,component: DashboardComponent}
 ];
